@@ -15,9 +15,8 @@
       <div class="container hero__bottom-inner">
         <h1 class="hero__title">MARKETING AGENCY</h1>
         <p class="hero__description">
-          At PICK Agency, we specialize in designing and installing modern solutions
-          for both residential and business needs. Full marketing & strategy,
-          influencer marketing, and creative digital campaigns.
+          At Pick Agency, we specialize in designing and installing modern solar systems for both residential and
+          business needs.
         </p>
         <a href="#contact" class="hero__cta">Contact Us</a>
       </div>
@@ -72,7 +71,7 @@
 
 .hero__bottom-inner {
   text-align: center;
-  padding-bottom: 24px;
+  padding-bottom: -24px;
 }
 
 .hero__title {
@@ -86,7 +85,7 @@
 .hero__description {
   max-width: 600px;
   margin: 0 auto 32px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--color-black);
   line-height: 1.6;
   opacity: 0.9;
@@ -111,9 +110,7 @@
 .hero__image {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
+  margin: 0 auto -30px auto;
 }
 
 .hero__image img {

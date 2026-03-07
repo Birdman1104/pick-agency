@@ -19,12 +19,7 @@ const partners = [
         </div>
       </div>
     </div>
-    <a href="mailto:arsenmazmanyan11@gmail.com" class="partners__contact-btn" aria-label="Contact us">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-        <polyline points="22,6 12,13 2,6" />
-      </svg>
-    </a>
+
   </section>
 </template>
 
@@ -69,32 +64,5 @@ const partners = [
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-dark-purple);
-}
-
-.partners__contact-btn {
-  position: fixed;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-dark-purple);
-  color: var(--color-white);
-  z-index: 50;
-  transition: transform 0.2s;
-}
-
-.partners__contact-btn:hover {
-  transform: translateY(-50%) scale(1.05);
-}
-
-@media (max-width: 768px) {
-  .partners__contact-btn {
-    width: 48px;
-    height: 48px;
-  }
 }
 </style>

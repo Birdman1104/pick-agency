@@ -12,24 +12,49 @@ const projects = [
     <div class="container">
       <h2 class="portfolio__title">PORTFOLIO</h2>
       <div class="portfolio__grid">
-        <article
-          v-for="(project, i) in projects"
-          :key="project.image"
-          class="portfolio__card"
-          :class="{ 'portfolio__card--large': i === 0 }"
-        >
+        <article class="portfolio__card portfolio__card--large">
           <div class="portfolio__image">
-            <img :src="project.image" :alt="project.name" />
+            <img :src="projects[0].image" :alt="projects[0].name" />
           </div>
-          <p class="portfolio__name">{{ project.name }}</p>
+          <p class="portfolio__name">{{ projects[0].name }}</p>
+          <div class="portfolio__image-overlay"></div>
+
+        </article>
+        <article class="cards-wrapper">
+
+          <div class="wrapper">
+            <div class="portfolio__card">
+              <div class="portfolio__image">
+                <img :src="projects[1].image" :alt="projects[1].name" />
+              </div>
+              <p class="portfolio__name">{{ projects[1].name }}</p>
+            </div>
+            <div class="portfolio__card">
+              <div class="portfolio__image">
+                <img :src="projects[2].image" :alt="projects[2].name" />
+              </div>
+              <p class="portfolio__name">{{ projects[2].name }}</p>
+            </div>
+          </div>
+
+          <div class="portfolio__card">
+            <div class="portfolio__image">
+              <img :src="projects[3].image" :alt="projects[3].name" />
+            </div>
+            <p class="portfolio__name">{{ projects[3].name }}</p>
+            <div class="portfolio__image-overlay"></div>
+
+          </div>
         </article>
       </div>
-      <a href="#contact" class="portfolio__link">
-        View More
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
+      <div class="portfolio__link-wrapper">
+        <a href="#contact" class="portfolio__link">
+          View More
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 </template>
@@ -50,8 +75,7 @@ const projects = [
 }
 
 .portfolio__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 16px;
   margin-bottom: 32px;
 }
@@ -65,21 +89,36 @@ const projects = [
 }
 
 .portfolio__card {
-  border-radius: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   overflow: hidden;
 }
+
+.cards-wrapper {
+  display: flex;
+  height: 50%;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.half-height {
+  height: 50%;
+}
+
 
 .portfolio__card--large {
   grid-row: span 2;
 }
 
 .portfolio__image {
-  aspect-ratio: 4/3;
   overflow: hidden;
 }
 
 .portfolio__card--large .portfolio__image {
-  aspect-ratio: 3/4;
+  height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -87,6 +126,11 @@ const projects = [
     height: 100%;
     aspect-ratio: auto;
   }
+}
+
+.wrapper {
+  display: flex;
+  gap: 10px;
 }
 
 .portfolio__image img {
@@ -97,10 +141,33 @@ const projects = [
 }
 
 .portfolio__name {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--color-dark-purple);
-  margin-top: 12px;
+  color: var(--color-white);
+  z-index: 1;
+}
+
+.portfolio__image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0%) 0%, rgb(0 0 0) 40%);
+  opacity: 0.5;
+}
+
+.portfolio__link-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  width: fit-content;
+
+  border-bottom: 1px solid var(--color-dark-purple);
 }
 
 .portfolio__link {
@@ -117,5 +184,16 @@ const projects = [
 
 .portfolio__link:hover {
   opacity: 0.8;
+}
+
+.container {
+  width: fit-content;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

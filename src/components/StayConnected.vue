@@ -28,6 +28,9 @@ const handleSubmit = (e) => {
         <button type="submit" class="stay-connected__submit">Contact Us</button>
       </form>
     </div>
+    <a href="mailto:arsenmazmanyan11@gmail.com" class="stay-connected__contact-btn" aria-label="Contact us">
+      <img src="/email_icon.png" alt="" width="24" height="24" />
+    </a>
   </section>
 </template>
 
@@ -119,4 +122,33 @@ const handleSubmit = (e) => {
   opacity: 0.95;
   transform: translateY(-2px);
 }
+
+
+.stay-connected__contact-btn {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-dark-purple);
+  color: var(--color-white);
+  z-index: 50;
+  transition: transform 0.2s;
+}
+
+.stay-connected__contact-btn:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* 
+@media (max-width: 768px) {
+  .stay-connected__contact-btn {
+    width: 48px;
+    height: 48px;
+  }
+} */
 </style>
