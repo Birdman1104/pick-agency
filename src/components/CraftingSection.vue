@@ -1,12 +1,49 @@
 <script setup>
+import { ref } from 'vue'
+import Modal from './Modal.vue'
+
+
+const showModal = ref(false)
+const selectedTag = ref(null)
+
+function openModal(tag) {
+  selectedTag.value = tag
+  showModal.value = true
+}
+
 const tags = [
-  { text: 'Telegram Ads', color: 'pink' },
-  { text: 'Digital Marketing & SMM', color: 'orange' },
-  { text: 'Creative Ideas', color: 'green' },
-  { text: 'Influencer Marketing', color: 'dark-orange' },
-  { text: 'Reel Making', color: 'lavender' },
-  { text: 'Full Marketing & Strategy', color: 'blue' },
+  {
+    text: 'Telegram Ads',
+    color: 'pink',
+    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
+  },
+  {
+    text: 'Digital Marketing & SMM',
+    color: 'orange',
+    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
+  },
+  {
+    text: 'Creative Ideas',
+    color: 'green',
+    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
+  },
+  {
+    text: 'Influencer Marketing',
+    color: 'dark-orange',
+    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
+  },
+  {
+    text: 'Reel Making',
+    color: 'lavender',
+    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
+  },
+  {
+    text: 'Full Marketing & Strategy',
+    color: 'blue',
+    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
+  },
 ]
+
 </script>
 
 <template>
@@ -18,36 +55,45 @@ const tags = [
         <span>BETTER WORLD</span>
         <div class="left-top-box relative"
           :style="{ '--rotation': `${-15 + 1 * 8}deg`, '--delay': `${1 * 0.1}s`, position: 'absolute' }">
-          <div class=" crafting__tag top " :class="`crafting__tag--${tags[0].color}`">
+          <div class=" crafting__tag top " :class="`crafting__tag--${tags[0].color}`"  @click="openModal(tags[0])">
             {{ tags[0].text }}
           </div>
-          <div class="fit-content crafting__tag top-sec-text" :class="`crafting__tag--${tags[1].color}`">
+          <div class="fit-content crafting__tag top-sec-text" :class="`crafting__tag--${tags[1].color}` "@click="openModal(tags[1])">
             {{ tags[1].text }}
           </div>
         </div>
 
         <div class="left-bottom-box" :class="'absolute'">
-          <div class="crafting__tag" :class="`crafting__tag--${tags[2].color}`">
+          <div class="crafting__tag" :class="`crafting__tag--${tags[2].color}`" @click="openModal(tags[2])">
             {{ tags[2].text }}
           </div>
         </div>
 
         <div class=" right-top-box" :class="'absolute'">
-          <div class="crafting__tag" :class="`crafting__tag--${tags[5].color}`">
+          <div class="crafting__tag" :class="`crafting__tag--${tags[5].color}`" @click="openModal(tags[5])">
             {{ tags[5].text }}
 
           </div>
         </div>
         <div class="right-bottom-box" :class="'absolute'">
-          <div class="crafting__tag bottom-first-text" :class="`crafting__tag--${tags[3].color}`">
+          <div class="crafting__tag bottom-first-text" :class="`crafting__tag--${tags[3].color}`" @click="openModal(tags[3])">
             {{ tags[3].text }}
           </div>
-          <div class="crafting__tag bottom-second-text sec-text" :class="`crafting__tag--${tags[4].color}`">
+          <div class="crafting__tag bottom-second-text sec-text" :class="`crafting__tag--${tags[4].color}`" @click="openModal(tags[4])">
             {{ tags[4].text }}
           </div>
         </div>
       </div>
 
+
+
+      <Modal 
+        v-if="selectedTag"
+        v-model="showModal" 
+        :title="selectedTag.text"
+        :description="selectedTag.description"
+        :variant="selectedTag.color" 
+      />
     </div>
   </section>
 </template>
