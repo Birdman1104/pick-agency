@@ -1,12 +1,12 @@
 <script setup>
+import AboutSection from './components/AboutSection.vue'
+import CraftingSection from './components/CraftingSection.vue'
+import Footer from './components/Footer.vue'
 import Header from './components/Header.vue'
 import Hero from './components/Hero.vue'
-import CraftingSection from './components/CraftingSection.vue'
-import AboutSection from './components/AboutSection.vue'
-import PortfolioSection from './components/PortfolioSection.vue'
 import PartnersSection from './components/PartnersSection.vue'
+import PortfolioSection from './components/PortfolioSection.vue'
 import StayConnected from './components/StayConnected.vue'
-import Footer from './components/Footer.vue'
 </script>
 
 <template>

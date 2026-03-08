@@ -1,11 +1,11 @@
 <script setup>
 const tags = [
-  { text: 'Storytelling & Copy', color: 'pink' },
-  { text: 'Digital Marketing & SEO', color: 'blue' },
-  { text: 'Content Creation', color: 'orange' },
-  { text: 'Full-stack development', color: 'green' },
-  { text: 'Visual Identity', color: 'purple' },
-  { text: 'Brand Strategy', color: 'lightgreen' },
+  { text: 'Telegram Ads', color: 'pink' },
+  { text: 'Digital Marketing & SMM', color: 'orange' },
+  { text: 'Creative Ideas', color: 'green' },
+  { text: 'Influencer Marketing', color: 'dark-orange' },
+  { text: 'Reel Making', color: 'lavender' },
+  { text: 'Full Marketing & Strategy', color: 'blue' },
 ]
 </script>
 
@@ -157,8 +157,10 @@ const tags = [
 
 .crafting__tag {
   padding: 5px 20px;
-  font-size: 0.9rem;
+  font-size: 1.0rem;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  letter-spacing: 0.0075em;
   color: var(--color-white);
   border-radius: 8px;
   transform: rotate(var(--rotation));
@@ -170,27 +172,33 @@ const tags = [
 }
 
 .crafting__tag--pink {
-  background: #e91e63;
+  background: #E588B2;
+  color: #2E154C
 }
 
 .crafting__tag--blue {
-  background: #2196f3;
+  background: #32668F;
+  color: #FCB316
 }
 
 .crafting__tag--orange {
-  background: #ff9800;
+  background: #FCB316;
+  color: #2E154C
 }
 
 .crafting__tag--green {
-  background: #4caf50;
+  background: #014934;
+  color: #FCB316
 }
 
-.crafting__tag--purple {
-  background: #9c27b0;
+.crafting__tag--lavender {
+  background: #9C88B5;
+  color: #2E154C
 }
 
-.crafting__tag--lightgreen {
-  background: #8bc34a;
+.crafting__tag--dark-orange {
+  background: #F57E20;
+  color: #014934
 }
 
 @media screen and (max-width: 500px) {
