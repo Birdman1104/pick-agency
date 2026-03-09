@@ -15,7 +15,7 @@ const handleSubmit = (e) => {
 <template>
   <section class="stay-connected" id="contact">
     <div class="stay-connected__bg">
-      <img src="/smiley.png" alt="" class="stay-connected__smiley" aria-hidden="true" />
+      <img src="/smiley_big.png" alt="" class="stay-connected__smiley" aria-hidden="true" />
     </div>
     <div class="container stay-connected__inner">
       <h2 class="stay-connected__title">
@@ -59,8 +59,8 @@ const handleSubmit = (e) => {
   width: 60%;
   max-width: 400px;
   height: auto;
-  opacity: 0.25;
 }
+
 
 .stay-connected__inner {
   position: relative;
