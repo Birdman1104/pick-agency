@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Modal from './Modal.vue'
-
+import CraftingTag from './CraftingTag.vue'
+import { tags, tagLayout, ROTATION_BASE, ROTATION_STEP } from '../data/services'
 
 const showModal = ref(false)
 const selectedTag = ref(null)
@@ -11,88 +12,56 @@ function openModal(tag) {
   showModal.value = true
 }
 
-const tags = [
-  {
-    text: 'Telegram Ads',
-    color: 'pink',
-    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
-  },
-  {
-    text: 'Digital Marketing & SMM',
-    color: 'orange',
-    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
-  },
-  {
-    text: 'Creative Ideas',
-    color: 'green',
-    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
-  },
-  {
-    text: 'Influencer Marketing',
-    color: 'dark-orange',
-    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
-  },
-  {
-    text: 'Reel Making',
-    color: 'lavender',
-    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
-  },
-  {
-    text: 'Full Marketing & Strategy',
-    color: 'blue',
-    description: 'A marketing strategy is a long-term, overarching plan for how a business will attract and retain customers by defining its value, identifying its target audience, understanding competitors, and choosing the right channels to communicate its message for sustained growth and competitive advantage. It acts as a blueprint, guiding specific marketing plans (like campaigns) and focusing efforts on key goals, such as increasing sales or brand awareness, by effectively positioning products and services in the market. '
-  },
-]
+const BOX_ORDER = ['left-top', 'left-bottom', 'right-top', 'right-bottom']
 
+const tagsByBox = computed(() => {
+  const groups = Object.fromEntries(BOX_ORDER.map((box) => [box, []]))
+  tagLayout.forEach(({ tagIndex, box, classes }) => {
+    groups[box].push({ tag: tags[tagIndex], classes })
+  })
+  return groups
+})
+
+const boxConfig = {
+  'left-top': {
+    boxClass: 'left-top-box relative',
+    style: { '--rotation': `${ROTATION_BASE + 1 * ROTATION_STEP}deg`, position: 'absolute' },
+  },
+  'left-bottom': { boxClass: 'left-bottom-box absolute' },
+  'right-top': { boxClass: 'right-top-box absolute' },
+  'right-bottom': { boxClass: 'right-bottom-box absolute' },
+}
 </script>
 
 <template>
   <section class="crafting" id="services">
     <div class="crafting__inner">
       <div class="crafting__title">
-        <span>
-          CRAFTING A</span>
+        <span>CRAFTING A</span>
         <span>BETTER WORLD</span>
-        <div class="left-top-box relative"
-          :style="{ '--rotation': `${-15 + 1 * 8}deg`, '--delay': `${1 * 0.1}s`, position: 'absolute' }">
-          <div class=" crafting__tag top " :class="`crafting__tag--${tags[0].color}`"  @click="openModal(tags[0])">
-            {{ tags[0].text }}
-          </div>
-          <div class="fit-content crafting__tag top-sec-text" :class="`crafting__tag--${tags[1].color}` "@click="openModal(tags[1])">
-            {{ tags[1].text }}
-          </div>
-        </div>
 
-        <div class="left-bottom-box" :class="'absolute'">
-          <div class="crafting__tag" :class="`crafting__tag--${tags[2].color}`" @click="openModal(tags[2])">
-            {{ tags[2].text }}
-          </div>
-        </div>
-
-        <div class=" right-top-box" :class="'absolute'">
-          <div class="crafting__tag" :class="`crafting__tag--${tags[5].color}`" @click="openModal(tags[5])">
-            {{ tags[5].text }}
-
-          </div>
-        </div>
-        <div class="right-bottom-box" :class="'absolute'">
-          <div class="crafting__tag bottom-first-text" :class="`crafting__tag--${tags[3].color}`" @click="openModal(tags[3])">
-            {{ tags[3].text }}
-          </div>
-          <div class="crafting__tag bottom-second-text sec-text" :class="`crafting__tag--${tags[4].color}`" @click="openModal(tags[4])">
-            {{ tags[4].text }}
-          </div>
+        <div
+          v-for="(boxTags, boxName) in tagsByBox"
+          :key="boxName"
+          :class="boxConfig[boxName]?.boxClass"
+          :style="boxConfig[boxName]?.style"
+        >
+          <CraftingTag
+            v-for="(item, i) in boxTags"
+            :key="i"
+            :tag="item.tag"
+            :tag-classes="item.classes"
+            @click="openModal"
+          />
         </div>
       </div>
 
-
-
-      <Modal 
+      <Modal
         v-if="selectedTag"
-        v-model="showModal" 
+        v-model="showModal"
         :title="selectedTag.text"
         :description="selectedTag.description"
-        :variant="selectedTag.color" 
+        :variant="selectedTag.color"
       />
     </div>
   </section>
@@ -162,7 +131,7 @@ const tags = [
   z-index: 1;
   rotate: -12deg;
   right: -60px;
-  bottom: 0
+  bottom: 0;
 }
 
 .fit-content {
@@ -190,74 +159,13 @@ const tags = [
   flex-direction: column;
 }
 
-.crafting__tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-
-.top-first-text {
-  position: absolute;
-}
-
-.crafting__tag {
-  padding: 5px 20px;
-  font-size: 1.0rem;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.0075em;
-  color: var(--color-white);
-  border-radius: 8px;
-  transform: rotate(var(--rotation));
-  transition: transform 0.2s;
-}
-
-.crafting__tag:hover {
-  transform: rotate(var(--rotation)) scale(1.05);
-}
-
-.crafting__tag--pink {
-  background: #E588B2;
-  color: #2E154C
-}
-
-.crafting__tag--blue {
-  background: #32668F;
-  color: #FCB316
-}
-
-.crafting__tag--orange {
-  background: #FCB316;
-  color: #2E154C
-}
-
-.crafting__tag--green {
-  background: #014934;
-  color: #FCB316
-}
-
-.crafting__tag--lavender {
-  background: #9C88B5;
-  color: #2E154C
-}
-
-.crafting__tag--dark-orange {
-  background: #F57E20;
-  color: #014934
-}
-
 @media screen and (max-width: 500px) {
   .left-top-box {
     rotate: -30deg;
   }
 
-  .crafting__tag {
-    font-size: 10px;
-  }
-
   .right-top-box {
-    right: -30px
+    right: -30px;
   }
 
   .right-bottom-box {
@@ -277,25 +185,18 @@ const tags = [
 }
 
 @media screen and (min-width: 300px) and (max-width: 800px) {
-
   .left-top-box {
     left: -40px;
     rotate: -20deg;
-  }
-
-  .crafting__tag {
-    font-size: 10px;
   }
 
   .top {
     left: 2px;
     top: -43px;
   }
-
 }
 
-
-@media screen and (min-width: 700px) and(max-width: 800px) {
+@media screen and (min-width: 700px) and (max-width: 800px) {
   .crafting__title {
     width: 300px;
   }
@@ -303,10 +204,9 @@ const tags = [
   .left-top-box {
     left: -40px;
   }
-
 }
 
-@media screen and (min-width: 800px)and (max-width: 1024px) {
+@media screen and (min-width: 800px) and (max-width: 1024px) {
   .crafting__title {
     width: 400px;
   }
@@ -314,13 +214,11 @@ const tags = [
   .left-top-box {
     left: -50px;
   }
-
 }
 
 @media screen and (min-width: 1024px) {
   .crafting__title {
     width: 500px;
   }
-
 }
 </style>

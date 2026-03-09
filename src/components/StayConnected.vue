@@ -143,12 +143,4 @@ const handleSubmit = (e) => {
 .stay-connected__contact-btn:hover {
   transform: translateY(-50%) scale(1.05);
 }
-
-/* 
-@media (max-width: 768px) {
-  .stay-connected__contact-btn {
-    width: 48px;
-    height: 48px;
-  }
-} */
 </style>

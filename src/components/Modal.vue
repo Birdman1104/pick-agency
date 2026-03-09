@@ -1,27 +1,42 @@
 <template>
   <Teleport to="body">
-    <div v-if="modelValue" class="overlay" @click.self="close">
-      <div class="modal" :class="`modal--${variant}`">
-        <button class="close-btn" @click="close">×</button>
-        <h2 class="modal-title">{{ title }}</h2>
+    <Transition name="modal">
+      <div v-if="modelValue" class="overlay" @click.self="close">
+        <div class="modal" :style="variantStyles">
+          <button class="close-btn" @click="close">×</button>
+          <h2 class="modal-title">{{ title }}</h2>
 
-        <p class="modal-description">
-          {{ description }}
-        </p>
+          <p class="modal-description">
+            {{ description }}
+          </p>
+        </div>
       </div>
-    </div>
+    </Transition>
   </Teleport>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { TAG_COLORS } from '../data/tagColors'
+
 const props = defineProps({
   modelValue: Boolean,
   title: String,
   description: String,
-  variant: String
+  variant: String,
 })
 
 const emit = defineEmits(['update:modelValue'])
+
+const variantStyles = computed(() => {
+  const colors = TAG_COLORS[props.variant]
+  if (!colors) return {}
+  return {
+    background: colors.background,
+    color: colors.color,
+    border: `4px solid ${colors.border}`,
+  }
+})
 
 function close() {
   emit('update:modelValue', false)
@@ -37,6 +52,27 @@ function close() {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .modal,
+.modal-leave-active .modal {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+}
+
+.modal-enter-from .modal,
+.modal-leave-to .modal {
+  transform: scale(0.8);
+  opacity: 0;
 }
 
 .modal {
@@ -72,44 +108,7 @@ function close() {
   color: inherit;
 }
 
-.modal--pink {
-  background: #E588B2;
-  color: #2E154C;
-  border: 4px solid #FF9AC7;
-}
-
-.modal--blue {
-  background: #32668F;
-  color: #FCB316;
-  border: 4px solid #FCB316;
-}
-
-.modal--orange {
-  background: #FCB316;
-  color: #2E154C;
-  border: 4px solid #FFD781;
-}
-
-.modal--green {
-  background: #014934;
-  color: #FCB316;
-  border: 4px solid #FCB316;
-}
-
-.modal--lavender {
-  background: #9C88B5;
-  color: #2E154C;
-  border: 4px solid #CEA5FF;
-}
-
-.modal--dark-orange {
-  background: #F57E20;
-  color: #014934;
-  border: 4px solid #FF7100;
-}
-
 @media screen and (max-width: 600px) {
-  
   .modal-title {
     font-size: 20px;
   }
@@ -118,5 +117,4 @@ function close() {
     font-size: 12px;
   }
 }
-
 </style>
