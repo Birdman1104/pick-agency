@@ -1,8 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue'
-import Modal from './Modal.vue'
+import { computed, ref } from 'vue'
+import { ROTATION_BASE, ROTATION_STEP, tagLayout, tags } from '../data/services'
 import CraftingTag from './CraftingTag.vue'
-import { tags, tagLayout, ROTATION_BASE, ROTATION_STEP } from '../data/services'
+import Modal from './Modal.vue'
 
 const showModal = ref(false)
 const selectedTag = ref(null)
@@ -40,29 +40,15 @@ const boxConfig = {
         <span>CRAFTING A</span>
         <span>BETTER WORLD</span>
 
-        <div
-          v-for="(boxTags, boxName) in tagsByBox"
-          :key="boxName"
-          :class="boxConfig[boxName]?.boxClass"
-          :style="boxConfig[boxName]?.style"
-        >
-          <CraftingTag
-            v-for="(item, i) in boxTags"
-            :key="i"
-            :tag="item.tag"
-            :tag-classes="item.classes"
-            @click="openModal"
-          />
+        <div v-for="(boxTags, boxName) in tagsByBox" :key="boxName" :class="boxConfig[boxName]?.boxClass"
+          :style="boxConfig[boxName]?.style">
+          <CraftingTag v-for="(item, i) in boxTags" :key="i" :tag="item.tag" :tag-classes="item.classes"
+            @click="openModal" />
         </div>
       </div>
 
-      <Modal
-        v-if="selectedTag"
-        v-model="showModal"
-        :title="selectedTag.text"
-        :description="selectedTag.description"
-        :variant="selectedTag.color"
-      />
+      <Modal v-if="selectedTag" v-model="showModal" :title="selectedTag.text" :description="selectedTag.description"
+        :variant="selectedTag.color" />
     </div>
   </section>
 </template>
@@ -76,13 +62,17 @@ const boxConfig = {
 .top {
   rotate: 50deg;
   position: absolute;
-  left: 20px;
-  top: -60px;
+  left: 0px;
+  top: -50px;
   width: 170px;
 }
 
 .top-sec-text {
   rotate: 10deg;
+  position: absolute;
+  left: -33px;
+  top: 20px;
+  white-space: nowrap;
 }
 
 .sec-text {
@@ -102,7 +92,6 @@ const boxConfig = {
 
 .left-top-box {
   rotate: -21deg;
-  left: 0px;
 }
 
 .left-bottom-box {
@@ -121,8 +110,8 @@ const boxConfig = {
 }
 
 .right-top-box {
-  right: 0;
-  top: 0;
+  right: -50px;
+  top: -20px;
   z-index: 1;
   rotate: 25deg;
 }
@@ -132,10 +121,6 @@ const boxConfig = {
   rotate: -12deg;
   right: -60px;
   bottom: 0;
-}
-
-.fit-content {
-  height: fit-content;
 }
 
 .absolute {

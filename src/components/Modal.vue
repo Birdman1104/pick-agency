@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, watch, onUnmounted } from 'vue'
 import { TAG_COLORS } from '../data/tagColors'
 
 const props = defineProps({
@@ -41,6 +41,26 @@ const variantStyles = computed(() => {
 function close() {
   emit('update:modelValue', false)
 }
+
+function handleEscape(e) {
+  if (e.key === 'Escape') close()
+}
+
+watch(
+  () => props.modelValue,
+  (isOpen) => {
+    if (isOpen) {
+      window.addEventListener('keydown', handleEscape)
+    } else {
+      window.removeEventListener('keydown', handleEscape)
+    }
+  },
+  { immediate: true }
+)
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleEscape)
+})
 </script>
 
 <style scoped>
