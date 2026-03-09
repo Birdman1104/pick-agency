@@ -1,10 +1,10 @@
 <script setup>
 const partners = [
-  { logo: '/partner_1.png', name: 'Company' },
-  { logo: '/partner_2.png', name: 'Support' },
-  { logo: '/partner_3.png', name: 'Consult' },
-  { logo: '/partner_4.png', name: 'Contact' },
-  { logo: '/partner_5.png', name: '' },
+  { logo: 'partner_1.png', name: 'Company' },
+  { logo: 'partner_2.png', name: 'Support' },
+  { logo: 'partner_3.png', name: 'Consult' },
+  { logo: 'partner_4.png', name: 'Contact' },
+  { logo: 'partner_5.png', name: '' },
 ]
 </script>
 

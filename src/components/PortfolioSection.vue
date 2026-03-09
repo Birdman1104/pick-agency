@@ -1,9 +1,9 @@
 <script setup>
 const projects = [
-  { image: '/collage_1.png', name: 'Project Name' },
-  { image: '/collage_2.png', name: 'Project Name' },
-  { image: '/collage_3.png', name: 'Project Name' },
-  { image: '/collage_4.png', name: 'Project Name' },
+  { image: 'collage_1.png', name: 'Project Name' },
+  { image: 'collage_2.png', name: 'Project Name' },
+  { image: 'collage_3.png', name: 'Project Name' },
+  { image: 'collage_4.png', name: 'Project Name' },
 ]
 </script>
 
