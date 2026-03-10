@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <Transition name="modal">
+    <Transition name="modal" appear>
       <div v-if="modelValue" class="overlay" @click.self="close">
         <div class="modal" :style="variantStyles">
           <button class="close-btn" @click="close">×</button>
