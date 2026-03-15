@@ -33,7 +33,7 @@ defineEmits(['click'])
 .crafting__tag {
   padding: 5px 20px;
   font-size: 1rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   letter-spacing: 0.0075em;
   border-radius: 8px;

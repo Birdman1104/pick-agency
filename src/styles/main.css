@@ -7,7 +7,7 @@
   --color-lavender-light: #f5f0fa;
   --color-white: #ffffff;
   --color-black: #1a1a1a;
-  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-body: 'BebasNeue', sans-serif;
 }
 
 *,
@@ -16,6 +16,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 html {
