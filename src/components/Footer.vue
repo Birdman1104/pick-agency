@@ -17,10 +17,10 @@ const socialLinks = [
 
 const JUMP_DURATION = 2000
 const touchColorPairs = [
-  { emailBg: '#fcb316', emailColor: '#2d1b4e', smileyFilter: 'none' },
-  { emailBg: '#E588B2', emailColor: '#2E154C', smileyFilter: 'hue-rotate(180deg)' },
-  { emailBg: '#9C88B5', emailColor: '#2E154C', smileyFilter: 'hue-rotate(90deg)' },
-  { emailBg: '#FCB316', emailColor: '#014934', smileyFilter: 'hue-rotate(270deg)' },
+  { emailBg: '#fcb316', emailColor: '#2d1b4e', smileyBkgFilter: 'none' },
+  { emailBg: '#E588B2', emailColor: '#2E154C', smileyBkgFilter: 'hue-rotate(180deg)' },
+  { emailBg: '#9C88B5', emailColor: '#2E154C', smileyBkgFilter: 'hue-rotate(90deg)' },
+  { emailBg: '#FCB316', emailColor: '#014934', smileyBkgFilter: 'hue-rotate(270deg)' },
 ]
 
 const colorIndex = ref(0)
@@ -49,7 +49,7 @@ onUnmounted(() => {
     <div class="container footer__inner">
       <div class="footer__brand">
         <div class="footer__logo-row">
-          <img src="/logo_top.png" alt="PICK" class="footer__logo" />
+          <img src="/logo_big.png" alt="PICK" class="footer__logo" />
         </div>
         <div class="footer__brand-visual">
           <a href="mailto:pickagency@gmail.com" class="footer__email" :style="{
@@ -58,8 +58,11 @@ onUnmounted(() => {
           }">
             pickagency@gmail.com
           </a>
-          <img src="/smiley.png" alt="" class="footer__smiley" aria-hidden="true"
-            :style="{ filter: touchColorPairs[colorIndex].smileyFilter }" />
+          <div class="footer__smiley-wrap">
+            <img src="/smiley_bkg.png" alt="" class="footer__smiley-bkg" aria-hidden="true"
+              :style="{ filter: touchColorPairs[colorIndex].smileyBkgFilter }" />
+            <img src="/smiley.png" alt="" class="footer__smiley" aria-hidden="true" />
+          </div>
         </div>
       </div>
       <div class="footer__sitemap">
@@ -123,14 +126,33 @@ onUnmounted(() => {
   gap: 0;
 }
 
-.footer__smiley {
+.footer__smiley-wrap {
   position: absolute;
   right: 0;
   top: -100px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: smileyJump 2s ease-in-out infinite;
+}
+
+.footer__smiley-bkg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 0;
+  transition: filter 0.15s ease;
+}
+
+.footer__smiley {
+  position: relative;
   width: 32px;
   height: 32px;
-  animation: smileyJump 2s ease-in-out infinite;
-  transition: filter 0.15s ease;
+  z-index: 1;
 }
 
 .footer__email {

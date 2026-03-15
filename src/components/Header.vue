@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const isMenuOpen = ref(false)
 
@@ -14,25 +14,15 @@ const navLinks = [
   <header class="header">
     <div class="container header__inner">
       <a href="#" class="header__logo">
-        <img src="/logo_top.png" alt="PICK Marketing Agency" class="header__logo-img" />
+        <img src="/logo_big.png" alt="PICK Marketing Agency" class="header__logo-img" />
       </a>
       <nav class="nav" :class="{ 'nav--open': isMenuOpen }">
-        <a
-          v-for="link in navLinks"
-          :key="link.label"
-          :href="link.href"
-          class="nav__link"
-          @click="isMenuOpen = false"
-        >
+        <a v-for="link in navLinks" :key="link.label" :href="link.href" class="nav__link" @click="isMenuOpen = false">
           {{ link.label }}
         </a>
       </nav>
-      <button
-        class="menu-toggle"
-        :class="{ 'menu-toggle--open': isMenuOpen }"
-        aria-label="Toggle menu"
-        @click="isMenuOpen = !isMenuOpen"
-      >
+      <button class="menu-toggle" :class="{ 'menu-toggle--open': isMenuOpen }" aria-label="Toggle menu"
+        @click="isMenuOpen = !isMenuOpen">
         <span class="menu-toggle__line"></span>
         <span class="menu-toggle__line"></span>
         <span class="menu-toggle__line"></span>
