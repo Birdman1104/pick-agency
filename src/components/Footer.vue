@@ -1,4 +1,6 @@
 <script setup>
+import { onMounted, onUnmounted, ref } from 'vue'
+
 const sitemapLinks = [
   { label: 'Services', href: '#services' },
   { label: 'About Us', href: '#about' },
@@ -12,6 +14,34 @@ const socialLinks = [
   { label: 'Telegram', href: '#' },
   { label: 'TikTok', href: '#' },
 ]
+
+const JUMP_DURATION = 2000
+const touchColorPairs = [
+  { emailBg: '#fcb316', emailColor: '#2d1b4e', smileyFilter: 'none' },
+  { emailBg: '#E588B2', emailColor: '#2E154C', smileyFilter: 'hue-rotate(180deg)' },
+  { emailBg: '#9C88B5', emailColor: '#2E154C', smileyFilter: 'hue-rotate(90deg)' },
+  { emailBg: '#FCB316', emailColor: '#014934', smileyFilter: 'hue-rotate(270deg)' },
+]
+
+const colorIndex = ref(0)
+let touchTimeout
+let touchInterval
+
+function cycleColors() {
+  colorIndex.value = (colorIndex.value + 1) % touchColorPairs.length
+}
+
+onMounted(() => {
+  touchTimeout = setTimeout(() => {
+    cycleColors()
+    touchInterval = setInterval(cycleColors, JUMP_DURATION)
+  }, JUMP_DURATION / 2)
+})
+
+onUnmounted(() => {
+  clearTimeout(touchTimeout)
+  clearInterval(touchInterval)
+})
 </script>
 
 <template>
@@ -20,19 +50,22 @@ const socialLinks = [
       <div class="footer__brand">
         <div class="footer__logo-row">
           <img src="/logo_top.png" alt="PICK" class="footer__logo" />
-          <img src="/smiley.png" alt="" class="footer__smiley" aria-hidden="true" />
         </div>
-        <a href="mailto:pickagency@gmail.com" class="footer__email">pickagency@gmail.com</a>
+        <div class="footer__brand-visual">
+          <a href="mailto:pickagency@gmail.com" class="footer__email" :style="{
+            background: touchColorPairs[colorIndex].emailBg,
+            color: touchColorPairs[colorIndex].emailColor,
+          }">
+            pickagency@gmail.com
+          </a>
+          <img src="/smiley.png" alt="" class="footer__smiley" aria-hidden="true"
+            :style="{ filter: touchColorPairs[colorIndex].smileyFilter }" />
+        </div>
       </div>
       <div class="footer__sitemap">
         <h4 class="footer__heading">Sitemap</h4>
         <nav class="footer__nav">
-          <a
-            v-for="link in sitemapLinks"
-            :key="link.label"
-            :href="link.href"
-            class="footer__link"
-          >
+          <a v-for="link in sitemapLinks" :key="link.label" :href="link.href" class="footer__link">
             {{ link.label }}
           </a>
         </nav>
@@ -40,12 +73,7 @@ const socialLinks = [
       <div class="footer__socials">
         <h4 class="footer__heading">Socials</h4>
         <nav class="footer__nav">
-          <a
-            v-for="social in socialLinks"
-            :key="social.label"
-            :href="social.href"
-            class="footer__link"
-          >
+          <a v-for="social in socialLinks" :key="social.label" :href="social.href" class="footer__link">
             {{ social.label }}
           </a>
         </nav>
@@ -83,22 +111,47 @@ const socialLinks = [
 }
 
 .footer__logo {
-  height: 36px;
+  height: 60px;
   width: auto;
 }
 
+.footer__brand-visual {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+}
+
 .footer__smiley {
+  position: absolute;
+  right: 0;
+  top: -100px;
   width: 32px;
   height: 32px;
+  animation: smileyJump 2s ease-in-out infinite;
+  transition: filter 0.15s ease;
 }
 
 .footer__email {
   font-size: 0.95rem;
-  color: var(--color-yellow);
   padding: 8px 16px;
-  background: rgba(245, 213, 71, 0.2);
   border-radius: 20px;
   display: inline-block;
+  transform: rotate(var(--rotation, -15deg));
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+@keyframes smileyJump {
+
+  0%,
+  100% {
+    top: -100px;
+  }
+
+  50% {
+    top: -50px;
+  }
 }
 
 .footer__email:hover {
@@ -110,19 +163,18 @@ const socialLinks = [
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-white);
+  color: var(--color-yellow);
   margin-bottom: 16px;
 }
 
 .footer__nav {
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
 .footer__link {
   font-size: 0.9rem;
-  color: var(--color-white);
+  color: var(--color-yellow);
   opacity: 0.9;
 }
 
