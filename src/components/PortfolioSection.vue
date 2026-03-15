@@ -28,22 +28,22 @@ const projects = [
                 <img :src="projects[1].image" :alt="projects[1].name" />
               </div>
               <p class="portfolio__name">{{ projects[1].name }}</p>
+              <div class="portfolio__image-overlay"></div>
             </div>
             <div class="portfolio__card">
               <div class="portfolio__image">
                 <img :src="projects[2].image" :alt="projects[2].name" />
               </div>
               <p class="portfolio__name">{{ projects[2].name }}</p>
+              <div class="portfolio__image-overlay"></div>
             </div>
           </div>
-
           <div class="portfolio__card">
             <div class="portfolio__image">
               <img :src="projects[3].image" :alt="projects[3].name" />
             </div>
             <p class="portfolio__name">{{ projects[3].name }}</p>
             <div class="portfolio__image-overlay"></div>
-
           </div>
         </article>
       </div>
@@ -142,10 +142,9 @@ const projects = [
 
 .portfolio__name {
   position: absolute;
-  bottom: 0;
-  left: 10px;
-  right: 10px;
-  font-size: 0.95rem;
+  bottom: 20px;
+  left: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--color-white);
   z-index: 1;
@@ -157,8 +156,7 @@ const projects = [
   left: 0;
   width: 100%;
   height: 35%;
-  background: linear-gradient(to bottom, rgb(0 0 0 / 0%) 0%, rgb(0 0 0) 40%);
-  opacity: 0.5;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
 }
 
 .portfolio__link-wrapper {
