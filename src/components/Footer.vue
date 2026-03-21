@@ -52,16 +52,18 @@ onUnmounted(() => {
           <img src="/logo_big.png" alt="PICK" class="footer__logo" />
         </div>
         <div class="footer__brand-visual">
-          <a href="mailto:pickagency@gmail.com" class="footer__email" :style="{
-            background: touchColorPairs[colorIndex].emailBg,
-            color: touchColorPairs[colorIndex].emailColor,
-          }">
-            pickagency@gmail.com
-          </a>
-          <div class="footer__smiley-wrap">
-            <img src="/smiley_bkg.png" alt="" class="footer__smiley-bkg" aria-hidden="true"
-              :style="{ filter: touchColorPairs[colorIndex].smileyBkgFilter }" />
-            <img src="/smiley.png" alt="" class="footer__smiley" aria-hidden="true" />
+          <div class="footer__email-wrap">
+            <a href="mailto:pickagency@gmail.com" class="footer__email" :style="{
+              background: touchColorPairs[colorIndex].emailBg,
+              color: touchColorPairs[colorIndex].emailColor,
+            }">
+              pickagency@gmail.com
+            </a>
+            <div class="footer__smiley-wrap">
+              <img src="/smiley_bkg.png" alt="" class="footer__smiley-bkg" aria-hidden="true"
+                :style="{ filter: touchColorPairs[colorIndex].smileyBkgFilter }" />
+              <img src="/smiley.png" alt="" class="footer__smiley" aria-hidden="true" />
+            </div>
           </div>
         </div>
       </div>
@@ -100,6 +102,43 @@ onUnmounted(() => {
   padding-bottom: 40px;
 }
 
+@media (max-width: 767px) {
+  .footer__inner {
+    justify-items: center;
+  }
+
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__logo-row {
+    justify-content: center;
+  }
+
+  .footer__brand-visual {
+    justify-content: center;
+  }
+
+  .footer__sitemap,
+  .footer__socials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__heading {
+    width: 100%;
+  }
+
+  .footer__nav {
+    align-items: center;
+  }
+}
+
 @media (min-width: 768px) {
   .footer__inner {
     grid-template-columns: 1fr 1fr 1fr;
@@ -119,16 +158,20 @@ onUnmounted(() => {
 }
 
 .footer__brand-visual {
-  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0;
+}
+
+/* Wraps email so smiley is anchored to the email's top-right corner on any screen size */
+.footer__email-wrap {
+  position: relative;
+  display: inline-block;
 }
 
 .footer__smiley-wrap {
   position: absolute;
-  right: 120px;
+  right: 0;
   top: -100px;
   width: 48px;
   height: 48px;
@@ -181,8 +224,8 @@ onUnmounted(() => {
 }
 
 .footer__heading {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 500;
   letter-spacing: 0.15em;
   color: var(--color-yellow);
   margin-bottom: 16px;

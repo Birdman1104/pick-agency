@@ -69,10 +69,11 @@ const handleSubmit = (e) => {
 }
 
 .stay-connected__title {
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 800;
   color: var(--color-dark-purple);
-  text-align: left;
+  text-align: center;
+  letter-spacing: 0.15em;
   margin-bottom: 40px;
 }
 
