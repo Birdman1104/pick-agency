@@ -128,7 +128,7 @@ onUnmounted(() => {
 
 .footer__smiley-wrap {
   position: absolute;
-  right: 0;
+  right: 120px;
   top: -100px;
   width: 48px;
   height: 48px;
@@ -172,7 +172,7 @@ onUnmounted(() => {
   }
 
   50% {
-    top: -50px;
+    top: -70px;
   }
 }
 

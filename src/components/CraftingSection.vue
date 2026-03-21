@@ -133,15 +133,17 @@ const boxConfig = {
 
 .crafting__title {
   position: relative;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 5rem);
+  font-weight: 400;
   color: var(--color-white);
   text-align: center;
   margin-bottom: 48px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
   word-wrap: break-word;
   display: flex;
   flex-direction: column;
+  line-height: 1;
+  gap: 0;
 }
 
 @media screen and (max-width: 500px) {
