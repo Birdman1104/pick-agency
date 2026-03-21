@@ -5,20 +5,34 @@
  */
 const chaosLetters = [
   { char: 'M', r: -14, tx: 0, ty: 4, d: 0.08 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.1 },
   { char: 'A', r: 11, tx: -8, ty: -2, d: 0.72 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.2 },
   { char: 'R', r: -9, tx: -5, ty: 6, d: 0.28 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.1 },
   { char: 'K', r: 16, tx: -3, ty: -5, d: 1.05 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.25 },
   { char: 'E', r: -7, tx: -4, ty: 3, d: 0.42 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.15 },
   { char: 'T', r: 10, tx: -6, ty: -7, d: 0.18 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'I', r: -12, tx: 2, ty: 5, d: 0.88 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'N', r: 8, tx: -5, ty: -3, d: 0.55 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'G', r: -10, tx: -7, ty: 4, d: 0.33 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'A', r: 13, tx: 2, ty: -4, d: 0.12 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'G', r: -8, tx: -6, ty: 6, d: 0.95 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'E', r: 9, tx: -4, ty: -2, d: 0.48 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'N', r: -11, tx: -5, ty: 5, d: 0.25 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'C', r: 7, tx: -3, ty: -6, d: 1.18 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'Y', r: -15, tx: -10, ty: 3, d: 0.65 },
 ]
 </script>
@@ -112,8 +126,8 @@ const chaosLetters = [
 }
 
 .hero__chaos-letter--space {
-  width: 0.5em;
-  min-width: 0.35em;
+  width: 0.25em;
+  min-width: 0.25em;
 }
 
 @keyframes letterDrop {
@@ -216,8 +230,8 @@ const chaosLetters = [
   }
 
   .hero__chaos-letter--space {
-    width: 0.48em;
-    min-width: 0.48em;
+    width: 0.15em;
+    min-width: 0.15em;
   }
 
   .hero__bottom {
