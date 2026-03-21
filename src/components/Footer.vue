@@ -183,7 +183,6 @@ onUnmounted(() => {
 .footer__heading {
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--color-yellow);
   margin-bottom: 16px;
