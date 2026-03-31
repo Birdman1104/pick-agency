@@ -4,37 +4,74 @@
  * Each entry: char, rotation (deg), translate x/y (px), animation delay (s)
  */
 const chaosLetters = [
-  { char: 'M', r: -14, tx: 0, ty: 4, d: 0.08 },
+  { char: 'M', r: -28, tx: 5, ty: 12, d: 0.08 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.1 },
-  { char: 'A', r: 11, tx: -8, ty: -2, d: 0.72 },
+  { char: 'A', r: 22, tx: -16, ty: -8, d: 0.72 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.2 },
-  { char: 'R', r: -9, tx: -5, ty: 6, d: 0.28 },
+  { char: 'R', r: -18, tx: -12, ty: 15, d: 0.28 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.1 },
-  { char: 'K', r: 16, tx: -3, ty: -5, d: 1.05 },
+  { char: 'K', r: 32, tx: -8, ty: -12, d: 1.05 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.25 },
-  { char: 'E', r: -7, tx: -4, ty: 3, d: 0.42 },
+  { char: 'E', r: -14, tx: -10, ty: 9, d: 0.42 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.15 },
-  { char: 'T', r: 10, tx: -6, ty: -7, d: 0.18 },
+  { char: 'T', r: 20, tx: -14, ty: -16, d: 0.18 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'I', r: -12, tx: 2, ty: 5, d: 0.88 },
+  { char: 'I', r: -24, tx: 6, ty: 13, d: 0.88 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'N', r: 8, tx: -5, ty: -3, d: 0.55 },
+  { char: 'N', r: 16, tx: -12, ty: -9, d: 0.55 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'G', r: -10, tx: -7, ty: 4, d: 0.33 },
+  { char: 'G', r: -20, tx: -15, ty: 11, d: 0.33 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'A', r: 13, tx: 2, ty: -4, d: 0.12 },
+  { char: 'A', r: 26, tx: 7, ty: -11, d: 0.12 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'G', r: -8, tx: -6, ty: 6, d: 0.95 },
+  { char: 'G', r: -16, tx: -13, ty: 14, d: 0.95 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'E', r: 9, tx: -4, ty: -2, d: 0.48 },
+  { char: 'E', r: 18, tx: -9, ty: -7, d: 0.48 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'N', r: -11, tx: -5, ty: 5, d: 0.25 },
+  { char: 'N', r: -22, tx: -11, ty: 12, d: 0.25 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'C', r: 7, tx: -3, ty: -6, d: 1.18 },
+  { char: 'C', r: 14, tx: -7, ty: -14, d: 1.18 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'Y', r: -15, tx: -10, ty: 3, d: 0.65 },
+  { char: 'Y', r: -30, tx: -20, ty: 8, d: 0.65 },
 ]
+
+import { ref, onMounted } from 'vue'
+
+const isVisible = ref(false)
+const isAligned = ref(false)
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        isVisible.value = true
+      }
+    },
+    { threshold: 0.4 }
+  )
+
+  const el = document.querySelector('.hero__top')
+  if (el) observer.observe(el)
+
+  // Scroll event to trigger alignment
+  const handleScroll = () => {
+    const heroTop = document.querySelector('.hero__top')
+    const heroBottom = document.querySelector('.hero__bottom')
+    if (!heroTop || !heroBottom) return
+
+    const topRect = heroTop.getBoundingClientRect()
+    const bottomRect = heroBottom.getBoundingClientRect()
+
+    // When hero__bottom comes into view, align letters
+    if (bottomRect.top < window.innerHeight * 0.7 && !isAligned.value) {
+      isAligned.value = true
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll)
+  return () => window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
@@ -42,22 +79,30 @@ const chaosLetters = [
     <div class="hero__top">
       <div class="container hero__top-inner">
         <div class="hero__brand">
-          <img src="/logo_big.png" alt="PICK" class="hero__logo" />
+          <img src="/logo_big.png" alt="PICK" :class="['hero__logo', { 'hero__logo--visible': isAligned }]" />
           <div class="hero__subtitle-chaos" role="text" aria-label="MARKETING AGENCY">
-            <span v-for="(item, i) in chaosLetters" :key="i" class="hero__chaos-letter"
-              :class="{ 'hero__chaos-letter--space': item.isSpace }" :style="{
-                '--r': `${item.r}deg`,
-                '--tx': `${item.tx}px`,
-                '--ty': `${item.ty}px`,
-                '--delay': `${item.d}s`,
-              }">{{ item.char }}</span>
+            <span v-for="(item, i) in chaosLetters" :key="i" class="hero__chaos-letter" :class="[
+              {
+                'hero__chaos-letter--space': item.isSpace,
+                'is-visible': isVisible,
+                'is-aligned': isAligned
+              }
+            ]" :style="{
+              '--r': `${item.r}deg`,
+              '--tx': `${item.tx}px`,
+              '--ty': `${item.ty}px`,
+              '--delay': `${item.d}s`,
+              '--align-delay': `${item.d * 0.25}s`,
+            }">
+              {{ item.char }}
+            </span>
           </div>
         </div>
       </div>
     </div>
     <div class="hero__bottom">
       <div class="container hero__bottom-inner">
-        <h1 class="hero__title">MARKETING AGENCY</h1>
+        <div class="hero__title-target"></div>
         <p class="hero__description">
           At Pick Agency, we specialize in designing and installing modern solar systems for both residential and
           business needs.
@@ -98,6 +143,17 @@ const chaosLetters = [
   max-width: 780px;
   width: 100%;
   height: auto;
+  transition: transform 0.5s ease;
+}
+
+.hero__logo--visible {
+  transform: scale(1.5);
+  margin-top: 30%;
+}
+
+.hero__title-target {
+  width: 100%;
+  height: 100px;
 }
 
 .hero__subtitle-chaos {
@@ -120,10 +176,20 @@ const chaosLetters = [
 .hero__chaos-letter {
   display: inline-block;
   opacity: 0;
-  animation: letterDrop 1s cubic-bezier(0.33, 1.15, 0.52, 1) forwards;
-  animation-delay: var(--delay);
+  transform: translateY(-110vh);
   will-change: transform, opacity;
 }
+
+.hero__chaos-letter.is-visible {
+  animation: letterDrop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--delay);
+}
+
+.hero__chaos-letter.is-aligned {
+  animation: letterAlign 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--align-delay);
+}
+
 
 .hero__chaos-letter--space {
   width: 0.25em;
@@ -143,6 +209,26 @@ const chaosLetters = [
   100% {
     transform: translateX(calc(var(--tx, 0px) * var(--letter-spread, 1))) translateY(var(--ty, 0px)) rotate(var(--r, 0deg));
     opacity: 1;
+  }
+}
+
+@keyframes letterAlign {
+  0% {
+    transform: translateX(var(--tx)) translateY(var(--ty)) rotate(var(--r)) scale(1);
+    opacity: 1;
+    color: var(--color-yellow);
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateX(0) translateY(250px) rotate(0deg) scale(0.5);
+    opacity: 1;
+    color: var(--color-dark-purple);
+    z-index: 1000;
+    width: 15px;
   }
 }
 
