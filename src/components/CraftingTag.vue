@@ -26,8 +26,8 @@ defineEmits(['click'])
 
 <style scoped>
 .crafting__tag {
-  padding: 8px 20px;
-  font-size: 1rem;
+  padding: 12px 15px;
+  font-size: 1.4rem;
   font-family: var(--font-body);
   font-weight: 300;
   letter-spacing: 0.0075em;

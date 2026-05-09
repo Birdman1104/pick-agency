@@ -4,39 +4,38 @@
  * Each entry: char, rotation (deg), translate x/y (px), animation delay (s)
  */
 const chaosLetters = [
-  { char: 'M', r: -28, tx: 5, ty: 12, d: 0.08 },
+  { char: 'M', r: -28, tx: 30, ty: 12, d: 0.08 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.1 },
-  { char: 'A', r: 22, tx: -16, ty: -8, d: 0.72 },
+  { char: 'A', r: -70, tx: 30, ty: 50, d: 0.72 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.2 },
-  { char: 'R', r: -18, tx: -12, ty: 15, d: 0.28 },
+  { char: 'R', r: 18, tx: -20, ty: 15, d: 0.28 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.1 },
-  { char: 'K', r: 32, tx: -8, ty: -12, d: 1.05 },
+  { char: 'K', r: 6, tx: -20, ty: 60, d: 1.05 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.25 },
-  { char: 'E', r: -14, tx: -10, ty: 9, d: 0.42 },
+  { char: 'E', r: -6, tx: -20, ty: 9, d: 0.42 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.15 },
-  { char: 'T', r: 20, tx: -14, ty: -16, d: 0.18 },
+  { char: 'T', r: -10, tx: -30, ty: 40, d: 0.18 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'I', r: -24, tx: 6, ty: 13, d: 0.88 },
+  { char: 'I', r: 24, tx: -60, ty: 0, d: 0.88 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'N', r: 16, tx: -12, ty: -9, d: 0.55 },
+  { char: 'N', r: 16, tx: -70, ty: 40, d: 0.55 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'G', r: -20, tx: -15, ty: 11, d: 0.33 },
+  { char: 'G', r: -20, tx: -60, ty: 11, d: 0.33 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'A', r: -49, tx: -40, ty: 80, d: 0.12 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'A', r: 26, tx: 7, ty: -11, d: 0.12 },
+  { char: 'G', r: 0, tx: -63, ty: 85, d: 0.95 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'G', r: -16, tx: -13, ty: 14, d: 0.95 },
+  { char: 'E', r: 0, tx: -79, ty: 25, d: 0.48 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'E', r: 18, tx: -9, ty: -7, d: 0.48 },
+  { char: 'N', r: 0, tx: 239, ty: -30, d: 0.25 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'N', r: -22, tx: -11, ty: 12, d: 0.25 },
+  { char: 'C', r: 14, tx: 225, ty: -80, d: 1.18 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'C', r: 14, tx: -7, ty: -14, d: 1.18 },
-  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'Y', r: -30, tx: -20, ty: 8, d: 0.65 },
+  { char: 'Y', r: -30, tx: 250, ty: -80, d: 0.65 },
 ]
 
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const isVisible = ref(false)
 const isAligned = ref(false)
@@ -96,6 +95,14 @@ onMounted(() => {
             }">
               {{ item.char }}
             </span>
+            <div v-for="group in chaosWordGroups" :key="group.label" class="hero__subtitle-chaos-word">
+              <span v-for="(item, i) in group.letters" :key="`${group.label}-${i}`" class="hero__chaos-letter" :style="{
+                '--r': `${item.r}deg`,
+                '--tx': `${item.tx}px`,
+                '--ty': `${item.ty}px`,
+                '--delay': `${item.d}s`,
+              }">{{ item.char }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -158,13 +165,16 @@ onMounted(() => {
 
 .hero__subtitle-chaos {
   --letter-spread: 1;
+  /* --word-gap: clamp(1px, 1vw, 5px); */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
-  max-width: min(100vw, 1200px);
-  font-family: var(--font-heading, 'BebasNeue', sans-serif);
-  font-size: clamp(3rem, 7.8vw, 4.2rem);
+  /* column-gap: var(--word-gap); */
+  row-gap: 0.06em;
+  max-width: min(100vw, 800px);
+  font-family: 'BebasNeue', sans-serif;
+  /* font-size: clamp(1.5rem, 4vw, 2.5rem); */
   font-weight: 800;
   color: var(--color-yellow);
   line-height: 0.85;
@@ -173,8 +183,17 @@ onMounted(() => {
   min-height: 3.2em;
 }
 
+.hero__subtitle-chaos-word {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .hero__chaos-letter {
   display: inline-block;
+  flex-shrink: 0;
+  transform-origin: 50% 88%;
   opacity: 0;
   transform: translateY(-110vh);
   will-change: transform, opacity;
@@ -198,7 +217,7 @@ onMounted(() => {
 
 @keyframes letterDrop {
   0% {
-    transform: translateY(-110vh) translateX(calc(var(--tx, 0px) * 0.5 * var(--letter-spread, 1))) rotate(calc(var(--r, 0deg) * 1.8 + 25deg));
+    transform: translateY(-110vh) translateX(calc(var(--tx, 0px) * 0.45 * var(--letter-spread, 1))) rotate(calc(var(--r, 0deg) * 1.35 + 18deg));
     opacity: 0;
   }
 
@@ -253,10 +272,11 @@ onMounted(() => {
 }
 
 .hero__title {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: 6rem;
   font-weight: 800;
   color: var(--color-dark-purple);
   margin-bottom: 20px;
+  font-family: 'BebasNeue', sans-serif;
   letter-spacing: 0.05em;
 }
 
@@ -265,18 +285,20 @@ onMounted(() => {
   margin: 0 auto 32px;
   font-size: 1.2rem;
   color: var(--color-black);
+  font-family: var(--font-body), sans-serif;
+  font-weight: 200;
   line-height: 1.6;
-  opacity: 0.9;
 }
 
 .hero__cta {
   display: inline-block;
-  padding: 12px 70px;
-  font-size: 1rem;
+  padding: 15px 100px;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-yellow);
   background: var(--color-dark-purple);
   border-radius: 12px;
+  font-family: var(--font-body), sans-serif;
   transition: opacity 0.2s, transform 0.2s;
 }
 
@@ -304,20 +326,15 @@ onMounted(() => {
   }
 
   .hero__logo {
-    max-width: 540px;
+    max-width: 780px;
   }
 
   .hero__subtitle-chaos {
     --letter-spread: 1.38;
-    max-width: min(100vw, 1800px);
+    max-width: min(100vw, 800px);
     font-size: clamp(4.5rem, 11.7vw, 6.3rem);
-    padding: 4px 0 29px;
+    padding: 4px 0 50px;
     margin-top: -8px;
-  }
-
-  .hero__chaos-letter--space {
-    width: 0.15em;
-    min-width: 0.15em;
   }
 
   .hero__bottom {

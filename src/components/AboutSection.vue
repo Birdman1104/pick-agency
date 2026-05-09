@@ -19,7 +19,7 @@
         <a href="#contact" class="about__link">
           Learn More
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
       </div>
@@ -68,6 +68,8 @@
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 800;
   color: var(--color-dark-purple);
+  font-family: var(--font-body), sans-serif;
+  font-weight: 200;
   margin-bottom: 20px;
   letter-spacing: -0.02em;
 }

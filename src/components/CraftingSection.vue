@@ -37,8 +37,8 @@ const boxConfig = {
   <section class="crafting" id="services">
     <div class="crafting__inner">
       <div class="crafting__title">
-        <span>CRAFTING A</span>
-        <span>BETTER WORLD</span>
+        <span>OUR EXPERT</span>
+        <span>SERVICE SUITE</span>
 
         <div v-for="(boxTags, boxName) in tagsByBox" :key="boxName" :class="boxConfig[boxName]?.boxClass"
           :style="boxConfig[boxName]?.style">
@@ -56,7 +56,7 @@ const boxConfig = {
 <style scoped>
 .crafting {
   background: var(--color-dark-purple);
-  padding: 150px 24px 90px 24px;
+  padding: 250px 24px 150px 24px;
 }
 
 .top {
