@@ -60,25 +60,27 @@ const boxConfig = {
 }
 
 .top {
-  rotate: 50deg;
+  rotate: 40deg;
   position: absolute;
-  left: 0px;
-  top: -50px;
-  width: 170px;
+  left: -15px;
+  top: -80px;
+  width: 200px;
 }
 
 .top-sec-text {
   rotate: 10deg;
   position: absolute;
-  left: -33px;
-  top: 20px;
+  left: -150px;
+  top: -10px;
   white-space: nowrap;
+  width: fit-content;
 }
 
 .sec-text {
   top: 60px;
   position: absolute;
   left: -16px;
+  padding: 10px 30px 10px 30px;
 }
 
 .crafting__inner {
@@ -98,19 +100,16 @@ const boxConfig = {
   z-index: 1;
   rotate: 20deg;
   left: -60px;
-  bottom: -20px;
+  bottom: -30px;
 }
 
 .bottom-second-text {
-  rotate: 30deg;
+  rotate: 20deg;
 }
 
-.bottom-first-text {
-  rotate: -10deg;
-}
 
 .right-top-box {
-  right: -50px;
+  right: -150px;
   top: -20px;
   z-index: 1;
   rotate: 25deg;
@@ -119,8 +118,8 @@ const boxConfig = {
 .right-bottom-box {
   z-index: 1;
   rotate: -12deg;
-  right: -60px;
-  bottom: 0;
+  right: -90px;
+  bottom: -50px;
 }
 
 .absolute {
@@ -133,7 +132,7 @@ const boxConfig = {
 
 .crafting__title {
   position: relative;
-  font-size: clamp(2.2rem, 6vw, 5rem);
+  font-size: clamp(6.2rem, 66vw, 6rem);
   font-weight: 400;
   color: var(--color-white);
   text-align: center;

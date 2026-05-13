@@ -17,10 +17,11 @@ const chaosLetters = [
   { char: 'T', r: -10, tx: -30, ty: 40, d: 0.18 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'I', r: 24, tx: -60, ty: 0, d: 0.88 },
-  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: -10, ty: 0, d: 0.62 },
   { char: 'N', r: 16, tx: -70, ty: 40, d: 0.55 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'G', r: -20, tx: -60, ty: 11, d: 0.33 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'A', r: -49, tx: -40, ty: 80, d: 0.12 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
@@ -165,16 +166,13 @@ onMounted(() => {
 
 .hero__subtitle-chaos {
   --letter-spread: 1;
-  /* --word-gap: clamp(1px, 1vw, 5px); */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
-  /* column-gap: var(--word-gap); */
   row-gap: 0.06em;
   max-width: min(100vw, 800px);
   font-family: 'BebasNeue', sans-serif;
-  /* font-size: clamp(1.5rem, 4vw, 2.5rem); */
   font-weight: 800;
   color: var(--color-yellow);
   line-height: 0.85;
@@ -246,8 +244,9 @@ onMounted(() => {
     transform: translateX(0) translateY(250px) rotate(0deg) scale(0.5);
     opacity: 1;
     color: var(--color-dark-purple);
-    z-index: 1000;
-    width: 15px;
+    z-index: 100;
+    font-size: 80px;
+    /* letter-spacing: -50px */
   }
 }
 
@@ -330,9 +329,8 @@ onMounted(() => {
   }
 
   .hero__subtitle-chaos {
-    --letter-spread: 1.38;
     max-width: min(100vw, 800px);
-    font-size: clamp(4.5rem, 11.7vw, 6.3rem);
+    font-size: 100px;
     padding: 4px 0 50px;
     margin-top: -8px;
   }

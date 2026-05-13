@@ -37,7 +37,7 @@ const navLinks = [
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 200;
   padding: 20px 0;
   background: var(--color-dark-purple-deep);
 }
