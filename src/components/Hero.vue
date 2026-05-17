@@ -25,15 +25,15 @@ const chaosLetters = [
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'A', r: -49, tx: -40, ty: 80, d: 0.12 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'G', r: 0, tx: -63, ty: 85, d: 0.95 },
+  { char: 'G', r: 0, tx: -80, ty: 85, d: 0.95 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'E', r: 0, tx: -79, ty: 25, d: 0.48 },
+  { char: 'E', r: 0, tx: -100, ty: 25, d: 0.48 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'N', r: 0, tx: 239, ty: -30, d: 0.25 },
+  { char: 'N', r: 0, tx: 375, ty: -60, d: 0.25 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'C', r: 14, tx: 225, ty: -80, d: 1.18 },
+  { char: 'C', r: 14, tx: 350, ty: -80, d: 1.18 },
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
-  { char: 'Y', r: -30, tx: 250, ty: -80, d: 0.65 },
+  { char: 'Y', r: -30, tx: 375, ty: -80, d: 0.65 },
 ]
 
 import { onMounted, ref } from 'vue'
