@@ -9,6 +9,10 @@ const form = ref({
 const handleSubmit = (e) => {
   e.preventDefault()
   console.log('Form submitted:', form.value)
+  form.value = {
+    name: '',
+    phone: '',
+  }
 }
 </script>
 
@@ -37,7 +41,7 @@ const handleSubmit = (e) => {
 .stay-connected {
   position: relative;
   background: var(--color-yellow);
-  padding: 80px 24px;
+  padding: 100px 24px 120px 24px;
   overflow: hidden;
 }
 
@@ -70,11 +74,12 @@ const handleSubmit = (e) => {
 
 .stay-connected__title {
   font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 800;
+  font-weight: 400;
   color: var(--color-dark-purple);
   text-align: center;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.05em;
   margin-bottom: 40px;
+  font-family: 'BebasNeue', sans-serif;
 }
 
 .stay-connected__asterisk {
@@ -112,10 +117,11 @@ const handleSubmit = (e) => {
 .stay-connected__submit {
   padding: 16px 32px;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--color-yellow);
   background: var(--color-dark-purple);
   border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
   transition: opacity 0.2s, transform 0.2s;
 }
 
@@ -123,7 +129,6 @@ const handleSubmit = (e) => {
   opacity: 0.95;
   transform: translateY(-2px);
 }
-
 
 .stay-connected__contact-btn {
   position: fixed;
@@ -139,6 +144,7 @@ const handleSubmit = (e) => {
   color: var(--color-white);
   z-index: 50;
   transition: transform 0.2s;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .stay-connected__contact-btn:hover {

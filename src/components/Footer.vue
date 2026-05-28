@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 
+const currentYear = new Date(Date.now()).getFullYear()
+
 const sitemapLinks = [
   { label: 'Services', href: '#services' },
   { label: 'About Us', href: '#about' },
@@ -17,10 +19,11 @@ const socialLinks = [
 
 const JUMP_DURATION = 2000
 const touchColorPairs = [
-  { emailBg: '#fcb316', emailColor: '#2d1b4e', smileyBkgFilter: 'none' },
-  { emailBg: '#E588B2', emailColor: '#2E154C', smileyBkgFilter: 'hue-rotate(180deg)' },
-  { emailBg: '#9C88B5', emailColor: '#2E154C', smileyBkgFilter: 'hue-rotate(90deg)' },
-  { emailBg: '#FCB316', emailColor: '#014934', smileyBkgFilter: 'hue-rotate(270deg)' },
+  { smileyBkgColor: '#E588B2', img: '/smiley_0.png' },
+  { smileyBkgColor: '#2B516F', img: '/smiley_1.png' },
+  { smileyBkgColor: '#9C88B5', img: '/smiley_2.png' },
+  { smileyBkgColor: '#054230', img: '/smiley_3.png' },
+  { smileyBkgColor: '#D46F1F', img: '/smiley_4.png' },
 ]
 
 const colorIndex = ref(0)
@@ -54,21 +57,25 @@ onUnmounted(() => {
         <div class="footer__brand-visual">
           <div class="footer__email-wrap">
             <a href="mailto:pickagency@gmail.com" class="footer__email" :style="{
-              background: touchColorPairs[colorIndex].emailBg,
-              color: touchColorPairs[colorIndex].emailColor,
+              background: '#FCB316',
             }">
               pickagency@gmail.com
             </a>
             <div class="footer__smiley-wrap">
-              <img src="/smiley_bkg.png" alt="" class="footer__smiley-bkg" aria-hidden="true"
-                :style="{ filter: touchColorPairs[colorIndex].smileyBkgFilter }" />
-              <img src="/smiley.png" alt="" class="footer__smiley" aria-hidden="true" />
+              <div class="footer__smiley-bkg" aria-hidden="true"
+                :style="{ backgroundColor: touchColorPairs[colorIndex].smileyBkgColor }" />
+              <img
+                :src="touchColorPairs[colorIndex].img"
+                alt=""
+                class="footer__smiley"
+                aria-hidden="true"
+              />
             </div>
           </div>
         </div>
       </div>
       <div class="footer__sitemap">
-        <h4 class="footer__heading">Sitemap</h4>
+        <h4 class="footer__heading" style="font-family: 'Montserrat', sans-serif;">Sitemap</h4>
         <nav class="footer__nav">
           <a v-for="link in sitemapLinks" :key="link.label" :href="link.href" class="footer__link">
             {{ link.label }}
@@ -76,7 +83,7 @@ onUnmounted(() => {
         </nav>
       </div>
       <div class="footer__socials">
-        <h4 class="footer__heading">Socials</h4>
+        <h4 class="footer__heading" style="font-family: 'Montserrat', sans-serif;">Socials</h4>
         <nav class="footer__nav">
           <a v-for="social in socialLinks" :key="social.label" :href="social.href" class="footer__link">
             {{ social.label }}
@@ -85,7 +92,7 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="footer__bottom">
-      <p class="footer__copyright">© 2026 Pick Agency. All rights reserved.</p>
+      <p class="footer__copyright">Copyright © PickAgency {{ currentYear }}</p>
     </div>
   </footer>
 </template>
@@ -93,7 +100,8 @@ onUnmounted(() => {
 <style scoped>
 .footer {
   background: var(--color-dark-purple);
-  padding: 60px 0 0;
+  padding: 100px 0 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .footer__inner {
@@ -128,10 +136,6 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-
-  .footer__heading {
-    width: 100%;
   }
 
   .footer__nav {
@@ -173,8 +177,8 @@ onUnmounted(() => {
   position: absolute;
   right: 0;
   top: -100px;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,11 +188,11 @@ onUnmounted(() => {
 .footer__smiley-bkg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   z-index: 0;
-  transition: filter 0.15s ease;
+  transition: background-color 0.15s ease;
 }
 
 .footer__smiley {
@@ -202,6 +206,8 @@ onUnmounted(() => {
   font-size: 0.95rem;
   padding: 8px 16px;
   border-radius: 20px;
+  color: #2E154C;
+  font-weight: 600;
   display: inline-block;
   transform: rotate(var(--rotation, -15deg));
   transition: background 0.15s ease, color 0.15s ease;
@@ -226,7 +232,6 @@ onUnmounted(() => {
 .footer__heading {
   font-size: 1.1rem;
   font-weight: 500;
-  letter-spacing: 0.15em;
   color: var(--color-yellow);
   margin-bottom: 16px;
 }
@@ -239,6 +244,7 @@ onUnmounted(() => {
 .footer__link {
   font-size: 0.9rem;
   color: var(--color-yellow);
+  font-weight: 400;
   opacity: 0.9;
 }
 
@@ -248,7 +254,6 @@ onUnmounted(() => {
 
 .footer__bottom {
   padding: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer__copyright {
