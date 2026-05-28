@@ -16,19 +16,26 @@ const tools = [
   { logo: 'spyfu.png' },
   { logo: 'tiktok.png' },
 ]
+
+const marqueeTools = [...tools, ...tools]
 </script>
 
 <template>
   <section class="partners">
     <div class="container">
       <h2 class="partners__title">BUILT ON TRUSTED TECHNOLOGIES</h2>
-      <div class="partners__list">
-        <div v-for="partner in tools" :key="partner.logo" class="partners__item">
-          <img :src="partner.logo" :alt="partner.name" class="partners__logo" />
+    </div>
+
+    <div class="partners__carousel">
+      <div class="partners__track">
+        <div v-for="(partner, index) in marqueeTools" :key="`${partner.logo}-${index}`" class="partners__item"
+          :aria-hidden="index >= tools.length">
+          <img :src="`/${partner.logo}`"
+            :alt="index < tools.length ? partner.logo.replace('.png', '').replace(/-/g, ' ') : ''"
+            class="partners__logo" />
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
@@ -37,6 +44,7 @@ const tools = [
   position: relative;
   background: var(--color-lavender);
   padding: 80px 0;
+  overflow: hidden;
 }
 
 .partners__title {
@@ -48,30 +56,64 @@ const tools = [
   letter-spacing: 0.05em;
 }
 
-.partners__list {
+.partners__carousel {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent);
+}
+
+.partners__track {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  gap: 40px;
+  width: max-content;
+  gap: 64px;
+  padding: 0 32px;
+  animation: partners-scroll 50s linear infinite;
+}
+
+.partners__track:hover {
+  animation-play-state: paused;
 }
 
 .partners__item {
+  flex-shrink: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
 }
 
 .partners__logo {
-  width: 80px;
   height: 80px;
   object-fit: contain;
 }
 
-.partners__name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-dark-purple);
+@keyframes partners-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .partners__carousel {
+    mask-image: none;
+  }
 }
 </style>
