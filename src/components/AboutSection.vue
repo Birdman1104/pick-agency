@@ -81,7 +81,7 @@
 
 .about__title-line {
   display: block;
-  font-weight: light;
+  font-weight: 200;
 }
 
 .about__title-line--emphasis {
@@ -89,7 +89,7 @@
 }
 
 .about__description {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--color-dark-purple);
   opacity: 0.85;
   line-height: 1.7;

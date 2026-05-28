@@ -1,10 +1,20 @@
 <script setup>
-const partners = [
-  { logo: 'partner_1.png', name: 'Company' },
-  { logo: 'partner_2.png', name: 'Support' },
-  { logo: 'partner_3.png', name: 'Consult' },
-  { logo: 'partner_4.png', name: 'Contact' },
-  { logo: 'partner_5.png', name: '' },
+const tools = [
+  { logo: 'after-effects.png' },
+  { logo: 'ahrefs.png' },
+  { logo: 'figma.png' },
+  { logo: 'google-ads.png' },
+  { logo: 'google-analytics.png' },
+  { logo: 'google-tag-manager.png' },
+  { logo: 'illustrator.png' },
+  { logo: 'meta.png' },
+  { logo: 'photoshop.png' },
+  { logo: 'premier-pro.png' },
+  { logo: 'screaming-frog.png' },
+  { logo: 'semrush.png' },
+  { logo: 'slack.png' },
+  { logo: 'spyfu.png' },
+  { logo: 'tiktok.png' },
 ]
 </script>
 
@@ -13,9 +23,8 @@ const partners = [
     <div class="container">
       <h2 class="partners__title">BUILT ON TRUSTED TECHNOLOGIES</h2>
       <div class="partners__list">
-        <div v-for="partner in partners" :key="partner.logo" class="partners__item">
+        <div v-for="partner in tools" :key="partner.logo" class="partners__item">
           <img :src="partner.logo" :alt="partner.name" class="partners__logo" />
-          <span v-if="partner.name" class="partners__name">{{ partner.name }}</span>
         </div>
       </div>
     </div>
