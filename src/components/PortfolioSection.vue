@@ -1,21 +1,22 @@
 <script setup>
 const projects = [
-  { image: 'collage_1.png', name: 'Project Name' },
-  { image: 'collage_2.png', name: 'Project Name' },
-  { image: 'collage_3.png', name: 'Project Name' },
-  { image: 'collage_4.png', name: 'Project Name' },
+  { image: 'collage_1.png', name: 'Project Name', title: "Project Title" },
+  { image: 'collage_2.png', name: 'Project Name', title: "Project Title" },
+  { image: 'collage_3.png', name: 'Project Name', title: "Project Title" },
+  { image: 'collage_4.png', name: 'Project Name', title: "Project Title" },
 ]
 </script>
 
 <template>
   <section class="portfolio">
     <div class="container">
-      <h2 class="portfolio__title">PORTFOLIO</h2>
+      <h2 class="title">PORTFOLIO</h2>
       <div class="portfolio__grid">
         <article class="portfolio__card portfolio__card--large">
           <div class="portfolio__image">
             <img :src="projects[0].image" :alt="projects[0].name" />
           </div>
+          <p class="portfolio__title">{{ projects[0].title }}</p>
           <p class="portfolio__name">{{ projects[0].name }}</p>
           <div class="portfolio__image-overlay"></div>
 
@@ -27,6 +28,7 @@ const projects = [
               <div class="portfolio__image">
                 <img :src="projects[1].image" :alt="projects[1].name" />
               </div>
+              <p class="portfolio__title">{{ projects[1].title }}</p>
               <p class="portfolio__name">{{ projects[1].name }}</p>
               <div class="portfolio__image-overlay"></div>
             </div>
@@ -34,6 +36,7 @@ const projects = [
               <div class="portfolio__image">
                 <img :src="projects[2].image" :alt="projects[2].name" />
               </div>
+              <p class="portfolio__title">{{ projects[2].title }}</p>
               <p class="portfolio__name">{{ projects[2].name }}</p>
               <div class="portfolio__image-overlay"></div>
             </div>
@@ -42,6 +45,7 @@ const projects = [
             <div class="portfolio__image">
               <img :src="projects[3].image" :alt="projects[3].name" />
             </div>
+            <p class="portfolio__title">{{ projects[3].title }}</p>
             <p class="portfolio__name">{{ projects[3].name }}</p>
             <div class="portfolio__image-overlay"></div>
           </div>
@@ -65,7 +69,7 @@ const projects = [
   padding: 80px 0;
 }
 
-.portfolio__title {
+.title {
   font-size: clamp(3rem, 8vw, 3.5rem);
   font-weight: 800;
   color: var(--color-dark-purple);
@@ -115,6 +119,7 @@ const projects = [
 
 .portfolio__image {
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .portfolio__card--large .portfolio__image {
@@ -146,6 +151,16 @@ const projects = [
   left: 20px;
   font-size: 1.25rem;
   font-weight: 600;
+  color: var(--color-white);
+  z-index: 1;
+}
+
+.portfolio__title {
+  position: absolute;
+  bottom: 50px;
+  left: 20px;
+  font-size: 0.75rem;
+  font-weight: 200;
   color: var(--color-white);
   z-index: 1;
 }
