@@ -9,7 +9,11 @@
       </div>
       <div class="about__content">
         <p class="about__label">ABOUT US</p>
-        <h2 class="about__title">We offer premium-class systems</h2>
+        <h2 class="about__title">
+          <span class="about__title-line">We offer</span>
+          <span class="about__title-line about__title-line--emphasis">premium-class</span>
+          <span class="about__title-line">solar systems.</span>
+        </h2>
         <p class="about__description">
           At PICK Agency, we specialize in designing and installing modern solutions
           for both residential and business needs. Our mission is to provide
@@ -65,13 +69,23 @@
 }
 
 .about__title {
+  display: flex;
+  flex-direction: column;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
+  /* font-weight: 100; */
   color: var(--color-dark-purple);
   font-family: var(--font-body), sans-serif;
-  font-weight: 200;
   margin-bottom: 20px;
   letter-spacing: -0.02em;
+}
+
+.about__title-line {
+  display: block;
+  font-weight: light;
+}
+
+.about__title-line--emphasis {
+  font-weight: 800;
 }
 
 .about__description {

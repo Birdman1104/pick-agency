@@ -19,7 +19,7 @@ const handleSubmit = (e) => {
     </div>
     <div class="container stay-connected__inner">
       <h2 class="stay-connected__title">
-        <span class="stay-connected__asterisk">*</span>BOOK A CALL
+        <span class="stay-connected__asterisk">*</span>STAY CONNECTED
       </h2>
       <form class="stay-connected__form" @submit="handleSubmit">
         <input v-model="form.name" type="text" placeholder="Name Surname" class="stay-connected__input" required />

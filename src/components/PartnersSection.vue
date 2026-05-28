@@ -11,7 +11,7 @@ const partners = [
 <template>
   <section class="partners">
     <div class="container">
-      <h2 class="partners__title">OUR PARTNERS</h2>
+      <h2 class="partners__title">BUILT ON TRUSTED TECHNOLOGIES</h2>
       <div class="partners__list">
         <div v-for="partner in partners" :key="partner.logo" class="partners__item">
           <img :src="partner.logo" :alt="partner.name" class="partners__logo" />
@@ -31,12 +31,12 @@ const partners = [
 }
 
 .partners__title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 800;
   color: var(--color-dark-purple);
   text-align: center;
   margin-bottom: 48px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
 }
 
 .partners__list {

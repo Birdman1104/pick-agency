@@ -61,17 +61,17 @@ const projects = [
 
 <style scoped>
 .portfolio {
-  background: var(--color-lavender);
+  background: #E5E5E5;
   padding: 80px 0;
 }
 
 .portfolio__title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: clamp(3rem, 8vw, 3.5rem);
   font-weight: 800;
   color: var(--color-dark-purple);
   text-align: center;
   margin-bottom: 48px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
 }
 
 .portfolio__grid {
