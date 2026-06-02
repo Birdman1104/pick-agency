@@ -135,6 +135,7 @@ const projects = [
 
 .wrapper {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
 }
 
@@ -172,6 +173,8 @@ const projects = [
   width: 100%;
   height: 35%;
   background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .portfolio__link-wrapper {

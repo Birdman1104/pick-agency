@@ -1,5 +1,5 @@
 <script setup>
-import { TAG_COLORS } from '../data/tagColors';
+import { TAG_COLORS } from "../data/tagColors";
 
 defineProps({
   tag: {
@@ -8,18 +8,23 @@ defineProps({
   },
   tagClasses: {
     type: String,
-    default: '',
+    default: "",
   },
-})
+});
 
-defineEmits(['click'])
+defineEmits(["click"]);
 </script>
 
 <template>
-  <div class="crafting__tag" :class="tagClasses" :style="{
-    background: TAG_COLORS[tag.color]?.background,
-    color: TAG_COLORS[tag.color]?.color,
-  }" @click="$emit('click', tag)">
+  <div
+    class="crafting__tag"
+    :class="tagClasses"
+    :style="{
+      background: TAG_COLORS[tag.color]?.background,
+      color: TAG_COLORS[tag.color]?.color,
+    }"
+    @click="$emit('click', tag)"
+  >
     {{ tag.text }}
   </div>
 </template>
@@ -39,10 +44,10 @@ defineEmits(['click'])
 
 .crafting__tag:hover {
   transform: rotate(var(--rotation, 0deg)) scale(1.05);
+  cursor: url("cursor.svg"), auto;
 }
 
-@media screen and (max-width: 500px),
-(min-width: 300px) and (max-width: 800px) {
+@media screen and (max-width: 500px), (min-width: 300px) and (max-width: 800px) {
   .crafting__tag {
     font-size: 10px;
   }

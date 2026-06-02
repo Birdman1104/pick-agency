@@ -339,4 +339,13 @@ onMounted(() => {
     padding: 80px 0 0;
   }
 }
+
+@media (min-width: 768px) {
+  .hero__logo--visible {
+    transform: scale(1) translateY(30%) !important  ;
+  }
+}
+
+
+
 </style>

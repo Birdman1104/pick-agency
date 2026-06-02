@@ -57,6 +57,7 @@ const boxConfig = {
 .crafting {
   background: var(--color-dark-purple);
   padding: 250px 24px 150px 24px;
+  cursor: url("cursor.svg"), auto;
 }
 
 .top {
@@ -145,18 +146,29 @@ const boxConfig = {
   gap: 0;
 }
 
-@media screen and (max-width: 500px) {
-  .left-top-box {
-    rotate: -30deg;
+@media screen and (max-width: 700px) {
+  .crafting__title {
+    width: 300px !important;
+  }
+
+  .top {
+    top: -30px;
+  }
+
+  .top-sec-text {
+    left: 0;
+    top: 20px;
   }
 
   .right-top-box {
-    right: -30px;
+    right: -20px;
+    rotate: 45deg;
   }
 
   .right-bottom-box {
-    right: -50px;
-    bottom: -20px;
+    right: -10px;
+    bottom: -10px;
+    rotate: -45deg;
   }
 
   .top {
@@ -168,19 +180,14 @@ const boxConfig = {
   .bottom-second-text {
     top: 35px !important;
   }
-}
 
-@media screen and (min-width: 300px) and (max-width: 800px) {
-  .left-top-box {
-    left: -40px;
-    rotate: -20deg;
-  }
-
-  .top {
-    left: 2px;
-    top: -43px;
+  .left-bottom-box {
+    left: 0 !important;
+    bottom: 10px !important;
+    rotate: 40deg !important;
   }
 }
+
 
 @media screen and (min-width: 700px) and (max-width: 800px) {
   .crafting__title {
