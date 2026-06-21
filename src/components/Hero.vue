@@ -36,12 +36,51 @@ const chaosLetters = [
   { char: 'Y', r: -30, tx: 375, ty: -80, d: 0.65 },
 ]
 
+const chaosLettersMB = [
+  { char: 'M', r: -28, tx: 10, ty: 12, d: 0.08 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.1 },
+  { char: 'A', r: -45, tx: 15, ty: 50, d: 0.72 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.2 },
+  { char: 'R', r: 18, tx: -20, ty: 15, d: 0.28 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.1 },
+  { char: 'K', r: 6, tx: -10, ty: 40, d: 1.05 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.25 },
+  { char: 'E', r: -6, tx: -10, ty: 9, d: 0.42 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.15 },
+  { char: 'T', r: -10, tx: -20, ty: 55, d: 0.18 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'I', r: 24, tx: -50, ty: 0, d: 0.88 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: -10, ty: 0, d: 0.62 },
+  { char: 'N', r: 45, tx: -60, ty: 40, d: 0.55 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'G', r: -40, tx: 10, ty: 20, d: 0.33 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'A', r: -49, tx: -50, ty: -14, d: 0.12 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'G', r: 0, tx: -60, ty: 15, d: 0.95 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'E', r: 30, tx: -60, ty: 0, d: 0.48 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'N', r: -35, tx: -15, ty: 0, d: 0.25 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'C', r: 14, tx: 10, ty: -10, d: 1.18 },
+  { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
+  { char: 'Y', r: -30, tx: 20, ty: 0, d: 0.65 },
+]
 import { onMounted, ref } from 'vue'
+import { useMediaQuery } from '@vueuse/core'
 
+const isMobile = useMediaQuery('(max-width: 768px)')
 const isVisible = ref(false)
 const isAligned = ref(false)
 
 onMounted(() => {
+  if (isMobile.value) {
+    isVisible.value = true
+    return
+  }
+
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
@@ -54,24 +93,25 @@ onMounted(() => {
   const el = document.querySelector('.hero__top')
   if (el) observer.observe(el)
 
-  // Scroll event to trigger alignment
   const handleScroll = () => {
-    const heroTop = document.querySelector('.hero__top')
     const heroBottom = document.querySelector('.hero__bottom')
-    if (!heroTop || !heroBottom) return
+    if (!heroBottom) return
 
-    const topRect = heroTop.getBoundingClientRect()
     const bottomRect = heroBottom.getBoundingClientRect()
 
-    // When hero__bottom comes into view, align letters
-    if (bottomRect.top < window.innerHeight * 0.7 && !isAligned.value) {
+    if (bottomRect.top < window.innerHeight * 0.7) {
       isAligned.value = true
     }
   }
 
   window.addEventListener('scroll', handleScroll)
-  return () => window.removeEventListener('scroll', handleScroll)
+
+  return () => {
+    observer.disconnect()
+    window.removeEventListener('scroll', handleScroll)
+  }
 })
+
 </script>
 
 <template>
@@ -81,19 +121,20 @@ onMounted(() => {
         <div class="hero__brand">
           <img src="/logo_big.png" alt="PICK" :class="['hero__logo', { 'hero__logo--visible': isAligned }]" />
           <div class="hero__subtitle-chaos" role="text" aria-label="MARKETING AGENCY">
-            <span v-for="(item, i) in chaosLetters" :key="i" class="hero__chaos-letter" :class="[
-              {
-                'hero__chaos-letter--space': item.isSpace,
-                'is-visible': isVisible,
-                'is-aligned': isAligned
-              }
-            ]" :style="{
-              '--r': `${item.r}deg`,
-              '--tx': `${item.tx}px`,
-              '--ty': `${item.ty}px`,
-              '--delay': `${item.d}s`,
-              '--align-delay': `${item.d * 0.25}s`,
-            }">
+            <span v-for="(item, i) in isMobile ? chaosLettersMB : chaosLetters" :key="i" class="hero__chaos-letter"
+              :class="[
+                {
+                  'hero__chaos-letter--space': item.isSpace,
+                  'is-visible': !isMobile && isVisible,
+                  'is-aligned': !isMobile && isAligned
+                }
+              ]" :style="{
+                '--r': `${item.r}deg`,
+                '--tx': `${item.tx}px`,
+                '--ty': `${item.ty}px`,
+                '--delay': `${item.d}s`,
+                '--align-delay': `${item.d * 0.25}s`,
+              }">
               {{ item.char }}
             </span>
             <div v-for="group in chaosWordGroups" :key="group.label" class="hero__subtitle-chaos-word">
@@ -339,13 +380,39 @@ onMounted(() => {
     padding: 80px 0 0;
   }
 }
-
+/* 
 @media (min-width: 768px) {
   .hero__logo--visible {
-    transform: scale(1) translateY(30%) !important  ;
+    transform: scale(1) translateY(30%) !important;
+  }
+} */
+
+@media (max-width: 767px) {
+  .hero__chaos-letter {
+    opacity: 1;
+    transform:
+      translateX(var(--tx)) translateY(var(--ty)) rotate(var(--r));
+    animation: none !important;
+  }
+
+  .hero__logo {
+    max-width: 260px !important;
+  }
+
+  .hero__subtitle-chaos {
+    font-size: 66px;
+    min-height: 220px;
+    position: relative;
   }
 }
 
 
+@media (max-width: 500px) {
 
+  .hero__subtitle-chaos {
+    font-size: 55px;
+    min-height: 220px;
+    position: relative;
+  }
+}
 </style>
