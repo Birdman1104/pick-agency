@@ -82,6 +82,7 @@
 .about__title-line {
   display: block;
   font-weight: 200;
+  margin-bottom: -10px;
 }
 
 .about__title-line--emphasis {

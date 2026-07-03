@@ -68,8 +68,8 @@ const chaosLettersMB = [
   { char: '\u00A0', isSpace: true, r: 0, tx: 0, ty: 0, d: 0.62 },
   { char: 'Y', r: -30, tx: 20, ty: 0, d: 0.65 },
 ]
-import { onMounted, ref } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
+import { onMounted, ref } from 'vue'
 
 const isMobile = useMediaQuery('(max-width: 768px)')
 const isVisible = ref(false)
@@ -152,6 +152,7 @@ onMounted(() => {
     <div class="hero__bottom">
       <div class="container hero__bottom-inner">
         <div class="hero__title-target"></div>
+        <h2 class="hero__title hero__title--mobile">MARKETING AGENCY</h2>
         <p class="hero__description">
           At Pick Agency, we specialize in designing and installing modern solar systems for both residential and
           business needs.
@@ -320,6 +321,10 @@ onMounted(() => {
   letter-spacing: 0.05em;
 }
 
+.hero__title--mobile {
+  display: none;
+}
+
 .hero__description {
   max-width: 640px;
   margin: 0 auto 32px;
@@ -341,6 +346,8 @@ onMounted(() => {
   font-family: var(--font-body), sans-serif;
   transition: opacity 0.2s, transform 0.2s;
 }
+
+
 
 .hero__cta:hover {
   opacity: 0.95;
@@ -380,6 +387,7 @@ onMounted(() => {
     padding: 80px 0 0;
   }
 }
+
 /* 
 @media (min-width: 768px) {
   .hero__logo--visible {
@@ -404,15 +412,36 @@ onMounted(() => {
     min-height: 220px;
     position: relative;
   }
+
+  .hero__title-target {
+    display: none;
+  }
+
+  .hero__title--mobile {
+    display: block;
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
 }
 
 
 @media (max-width: 500px) {
-
   .hero__subtitle-chaos {
     font-size: 55px;
     min-height: 220px;
     position: relative;
+  }
+
+  .hero__title--mobile {
+    font-size: 2.75rem;
+  }
+
+  .hero__cta {
+    padding: 16px 120px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
   }
 }
 </style>

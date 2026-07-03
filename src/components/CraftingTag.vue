@@ -16,15 +16,10 @@ defineEmits(["click"]);
 </script>
 
 <template>
-  <div
-    class="crafting__tag"
-    :class="tagClasses"
-    :style="{
-      background: TAG_COLORS[tag.color]?.background,
-      color: TAG_COLORS[tag.color]?.color,
-    }"
-    @click="$emit('click', tag)"
-  >
+  <div class="crafting__tag" :class="tagClasses" :style="{
+    background: TAG_COLORS[tag.color]?.background,
+    color: TAG_COLORS[tag.color]?.color,
+  }" @click="$emit('click', tag)">
     {{ tag.text }}
   </div>
 </template>
@@ -47,9 +42,11 @@ defineEmits(["click"]);
   cursor: url("cursor.svg"), auto;
 }
 
-@media screen and (max-width: 500px), (min-width: 300px) and (max-width: 800px) {
+@media screen and (max-width: 500px),
+(min-width: 300px) and (max-width: 800px) {
   .crafting__tag {
-    font-size: 10px;
+    font-size: 12px;
+    padding: 14px 18px;
   }
 }
 </style>
