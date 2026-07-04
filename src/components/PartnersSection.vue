@@ -30,7 +30,7 @@ const marqueeTools = [...tools, ...tools]
       <div class="partners__track">
         <div v-for="(partner, index) in marqueeTools" :key="`${partner.logo}-${index}`" class="partners__item"
           :aria-hidden="index >= tools.length">
-          <img :src="`/${partner.logo}`"
+          <img :src="partner.logo"
             :alt="index < tools.length ? partner.logo.replace('.png', '').replace(/-/g, ' ') : ''"
             class="partners__logo" />
         </div>
