@@ -149,6 +149,7 @@ const boxConfig = {
 @media screen and (max-width: 700px) {
   .crafting__title {
     width: 300px !important;
+    font-size: clamp(4.2rem, 66vw, 4rem);
   }
 
   .top {

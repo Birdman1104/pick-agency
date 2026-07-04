@@ -39,14 +39,8 @@
 
 .about__inner {
   display: grid;
-  gap: 48px;
+  gap: 30px;
   align-items: center;
-}
-
-@media (min-width: 768px) {
-  .about__inner {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 .about__image {
@@ -108,5 +102,11 @@
 
 .about__link:hover {
   opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .about__inner {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>

@@ -57,28 +57,29 @@ const handleSubmit = (e) => {
 .stay-connected__smiley {
   position: absolute;
   right: -10%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 60%;
-  max-width: 400px;
-  height: auto;
+  top: 10%;
+  height: 80%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: right center;
 }
 
 
 .stay-connected__inner {
   position: relative;
   z-index: 1;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
 .stay-connected__title {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 400;
   color: var(--color-dark-purple);
   text-align: center;
   letter-spacing: 0.05em;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   font-family: 'BebasNeue', sans-serif;
 }
 
