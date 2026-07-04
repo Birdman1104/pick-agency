@@ -19,11 +19,11 @@ const socialLinks = [
 
 const JUMP_DURATION = 2000
 const touchColorPairs = [
-  { smileyBkgColor: '#E588B2', img: '/smiley_0.png' },
-  { smileyBkgColor: '#2B516F', img: '/smiley_1.png' },
-  { smileyBkgColor: '#9C88B5', img: '/smiley_2.png' },
-  { smileyBkgColor: '#054230', img: '/smiley_3.png' },
-  { smileyBkgColor: '#D46F1F', img: '/smiley_4.png' },
+  { smileyBkgColor: '#E588B2', img: 'smiley_0.png' },
+  { smileyBkgColor: '#2B516F', img: 'smiley_1.png' },
+  { smileyBkgColor: '#9C88B5', img: 'smiley_2.png' },
+  { smileyBkgColor: '#054230', img: 'smiley_3.png' },
+  { smileyBkgColor: '#D46F1F', img: 'smiley_4.png' },
 ]
 
 const colorIndex = ref(0)
@@ -64,12 +64,7 @@ onUnmounted(() => {
             <div class="footer__smiley-wrap">
               <div class="footer__smiley-bkg" aria-hidden="true"
                 :style="{ backgroundColor: touchColorPairs[colorIndex].smileyBkgColor }" />
-              <img
-                :src="touchColorPairs[colorIndex].img"
-                alt=""
-                class="footer__smiley"
-                aria-hidden="true"
-              />
+              <img :src="touchColorPairs[colorIndex].img" alt="" class="footer__smiley" aria-hidden="true" />
             </div>
           </div>
         </div>
