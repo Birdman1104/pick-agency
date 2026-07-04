@@ -1,20 +1,20 @@
 <script setup>
 const tools = [
-  { logo: 'after-effects.png' },
-  { logo: 'ahrefs.png' },
-  { logo: 'figma.png' },
-  { logo: 'google-ads.png' },
-  { logo: 'google-analytics.png' },
-  { logo: 'google-tag-manager.png' },
-  { logo: 'illustrator.png' },
-  { logo: 'meta.png' },
-  { logo: 'photoshop.png' },
-  { logo: 'premier-pro.png' },
-  { logo: 'screaming-frog.png' },
-  { logo: 'semrush.png' },
-  { logo: 'slack.png' },
-  { logo: 'spyfu.png' },
-  { logo: 'tiktok.png' },
+  { logo: 'after-effects.png', name: 'After Effects' },
+  { logo: 'ahrefs.png', name: 'Ahrefs' },
+  { logo: 'figma.png', name: 'Figma' },
+  { logo: 'google-ads.png', name: 'Google Ads' },
+  { logo: 'google-analytics.png', name: 'Google Analytics' },
+  { logo: 'google-tag-manager.png', name: 'Google Tag Manager' },
+  { logo: 'illustrator.png', name: 'Illustrator' },
+  { logo: 'meta.png', name: 'Meta' },
+  { logo: 'photoshop.png', name: 'Photoshop' },
+  { logo: 'premier-pro.png', name: 'Premier Pro' },
+  { logo: 'screaming-frog.png', name: 'Screaming Frog' },
+  { logo: 'semrush.png', name: 'Semrush' },
+  { logo: 'slack.png', name: 'Slack' },
+  { logo: 'spyfu.png', name: 'Spyfu' },
+  { logo: 'tiktok.png', name: 'TikTok' },
 ]
 
 const marqueeTools = [...tools, ...tools]
@@ -30,9 +30,7 @@ const marqueeTools = [...tools, ...tools]
       <div class="partners__track">
         <div v-for="(partner, index) in marqueeTools" :key="`${partner.logo}-${index}`" class="partners__item"
           :aria-hidden="index >= tools.length">
-          <img :src="partner.logo"
-            :alt="index < tools.length ? partner.logo.replace('.png', '').replace(/-/g, ' ') : ''"
-            class="partners__logo" />
+          <img :src="partner.logo" :alt="partner.name" class="partners__logo" />
         </div>
       </div>
     </div>
