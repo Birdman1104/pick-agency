@@ -104,7 +104,8 @@ onMounted(() => {
     }
   }
 
-  window.addEventListener('scroll', handleScroll)
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
 
   return () => {
     observer.disconnect()
@@ -120,38 +121,40 @@ onMounted(() => {
       <div class="container hero__top-inner">
         <div class="hero__brand">
           <img src="/logo_big.png" alt="PICK" :class="['hero__logo', { 'hero__logo--visible': isAligned }]" />
-          <div class="hero__subtitle-chaos" role="text" aria-label="MARKETING AGENCY">
-            <span v-for="(item, i) in isMobile ? chaosLettersMB : chaosLetters" :key="i" class="hero__chaos-letter"
-              :class="[
-                {
-                  'hero__chaos-letter--space': item.isSpace,
-                  'is-visible': !isMobile && isVisible,
-                  'is-aligned': !isMobile && isAligned
-                }
-              ]" :style="{
+          <div
+            class="hero__subtitle-chaos"
+            :class="{ 'hero__subtitle-chaos--aligned': !isMobile && isAligned }"
+            role="text"
+            aria-label="MARKETING AGENCY"
+          >
+            <span
+              v-for="(item, i) in isMobile ? chaosLettersMB : chaosLetters"
+              :key="i"
+              class="hero__chaos-letter"
+              :class="{
+                'hero__chaos-letter--space': item.isSpace,
+                'is-visible': !isMobile && isVisible,
+              }"
+              :style="{
                 '--r': `${item.r}deg`,
                 '--tx': `${item.tx}px`,
                 '--ty': `${item.ty}px`,
                 '--delay': `${item.d}s`,
-                '--align-delay': `${item.d * 0.25}s`,
-              }">
+              }"
+            >
               {{ item.char }}
             </span>
-            <div v-for="group in chaosWordGroups" :key="group.label" class="hero__subtitle-chaos-word">
-              <span v-for="(item, i) in group.letters" :key="`${group.label}-${i}`" class="hero__chaos-letter" :style="{
-                '--r': `${item.r}deg`,
-                '--tx': `${item.tx}px`,
-                '--ty': `${item.ty}px`,
-                '--delay': `${item.d}s`,
-              }">{{ item.char }}</span>
-            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="hero__bottom">
       <div class="container hero__bottom-inner">
-        <div class="hero__title-target"></div>
+        <div class="hero__title-target">
+          <h2 :class="['hero__title', 'hero__title--desktop', { 'hero__title--visible': isAligned }]">
+            MARKETING AGENCY
+          </h2>
+        </div>
         <h2 class="hero__title hero__title--mobile">MARKETING AGENCY</h2>
         <p class="hero__description">
           At Pick Agency, we specialize in designing and installing modern solar systems for both residential and
@@ -203,7 +206,8 @@ onMounted(() => {
 
 .hero__title-target {
   width: 100%;
-  height: 100px;
+  min-height: 1.1em;
+  margin-bottom: 20px;
 }
 
 .hero__subtitle-chaos {
@@ -223,12 +227,6 @@ onMounted(() => {
   min-height: 3.2em;
 }
 
-.hero__subtitle-chaos-word {
-  display: inline-flex;
-  flex-wrap: nowrap;
-  align-items: flex-end;
-  justify-content: center;
-}
 
 .hero__chaos-letter {
   display: inline-block;
@@ -244,11 +242,11 @@ onMounted(() => {
   animation-delay: var(--delay);
 }
 
-.hero__chaos-letter.is-aligned {
-  animation: letterAlign 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: var(--align-delay);
+.hero__subtitle-chaos--aligned {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
 }
-
 
 .hero__chaos-letter--space {
   width: 0.25em;
@@ -271,32 +269,21 @@ onMounted(() => {
   }
 }
 
-@keyframes letterAlign {
-  0% {
-    transform: translateX(var(--tx)) translateY(var(--ty)) rotate(var(--r)) scale(1);
-    opacity: 1;
-    color: var(--color-yellow);
-  }
-
-  50% {
-    opacity: 0.9;
-  }
-
-  100% {
-    transform: translateX(0) translateY(250px) rotate(0deg) scale(0.5);
-    opacity: 1;
-    color: var(--color-dark-purple);
-    z-index: 100;
-    font-size: 80px;
-    /* letter-spacing: -50px */
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero__chaos-letter {
     animation: none;
     opacity: 1;
     transform: translateX(calc(var(--tx, 0px) * var(--letter-spread, 1))) translateY(var(--ty, 0px)) rotate(var(--r, 0deg));
+  }
+
+  .hero__subtitle-chaos--aligned {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .hero__title--desktop {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -313,25 +300,39 @@ onMounted(() => {
 }
 
 .hero__title {
-  font-size: 6rem;
-  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 400;
   color: var(--color-dark-purple);
-  margin-bottom: 20px;
   font-family: 'BebasNeue', sans-serif;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.hero__title--desktop {
+  display: block;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+}
+
+.hero__title--desktop.hero__title--visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero__title--mobile {
   display: none;
+  margin-bottom: 20px;
 }
 
 .hero__description {
   max-width: 640px;
   margin: 0 auto 32px;
   font-size: 1.2rem;
-  color: var(--color-black);
+  color: var(--color-dark-purple);
   font-family: var(--font-body), sans-serif;
-  font-weight: 200;
+  font-weight: 400;
   line-height: 1.6;
 }
 
@@ -369,7 +370,7 @@ onMounted(() => {
 
 @media (min-width: 768px) {
   .hero__top {
-    padding: 80px 0 60px;
+    padding: 120px 0 60px;
   }
 
   .hero__logo {
@@ -411,6 +412,10 @@ onMounted(() => {
     font-size: 66px;
     min-height: 220px;
     position: relative;
+  }
+
+  .hero__title--desktop {
+    display: none;
   }
 
   .hero__title-target {

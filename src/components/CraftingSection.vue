@@ -1,36 +1,44 @@
 <script setup>
-import { computed, ref } from 'vue'
-import { ROTATION_BASE, ROTATION_STEP, tagLayout, tags } from '../data/services'
-import CraftingTag from './CraftingTag.vue'
-import Modal from './Modal.vue'
+import { computed, ref } from "vue";
+import {
+  ROTATION_BASE,
+  ROTATION_STEP,
+  tagLayout,
+  tags,
+} from "../data/services";
+import CraftingTag from "./CraftingTag.vue";
+import Modal from "./Modal.vue";
 
-const showModal = ref(false)
-const selectedTag = ref(null)
+const showModal = ref(false);
+const selectedTag = ref(null);
 
 function openModal(tag) {
-  selectedTag.value = tag
-  showModal.value = true
+  selectedTag.value = tag;
+  showModal.value = true;
 }
 
-const BOX_ORDER = ['left-top', 'left-bottom', 'right-top', 'right-bottom']
+const BOX_ORDER = ["left-top", "left-bottom", "right-top", "right-bottom"];
 
 const tagsByBox = computed(() => {
-  const groups = Object.fromEntries(BOX_ORDER.map((box) => [box, []]))
+  const groups = Object.fromEntries(BOX_ORDER.map((box) => [box, []]));
   tagLayout.forEach(({ tagIndex, box, classes }) => {
-    groups[box].push({ tag: tags[tagIndex], classes })
-  })
-  return groups
-})
+    groups[box].push({ tag: tags[tagIndex], classes });
+  });
+  return groups;
+});
 
 const boxConfig = {
-  'left-top': {
-    boxClass: 'left-top-box relative',
-    style: { '--rotation': `${ROTATION_BASE + 1 * ROTATION_STEP}deg`, position: 'absolute' },
+  "left-top": {
+    boxClass: "left-top-box relative",
+    style: {
+      "--rotation": `${ROTATION_BASE + 1 * ROTATION_STEP}deg`,
+      position: "absolute",
+    },
   },
-  'left-bottom': { boxClass: 'left-bottom-box absolute' },
-  'right-top': { boxClass: 'right-top-box absolute' },
-  'right-bottom': { boxClass: 'right-bottom-box absolute' },
-}
+  "left-bottom": { boxClass: "left-bottom-box absolute" },
+  "right-top": { boxClass: "right-top-box absolute" },
+  "right-bottom": { boxClass: "right-bottom-box absolute" },
+};
 </script>
 
 <template>
@@ -40,15 +48,29 @@ const boxConfig = {
         <span>OUR EXPERT</span>
         <span>SERVICE SUITE</span>
 
-        <div v-for="(boxTags, boxName) in tagsByBox" :key="boxName" :class="boxConfig[boxName]?.boxClass"
-          :style="boxConfig[boxName]?.style">
-          <CraftingTag v-for="(item, i) in boxTags" :key="i" :tag="item.tag" :tag-classes="item.classes"
-            @click="openModal" />
+        <div
+          v-for="(boxTags, boxName) in tagsByBox"
+          :key="boxName"
+          :class="boxConfig[boxName]?.boxClass"
+          :style="boxConfig[boxName]?.style"
+        >
+          <CraftingTag
+            v-for="(item, i) in boxTags"
+            :key="i"
+            :tag="item.tag"
+            :tag-classes="item.classes"
+            @click="openModal"
+          />
         </div>
       </div>
 
-      <Modal v-if="selectedTag" v-model="showModal" :title="selectedTag.text" :description="selectedTag.description"
-        :variant="selectedTag.color" />
+      <Modal
+        v-if="selectedTag"
+        v-model="showModal"
+        :title="selectedTag.text"
+        :description="selectedTag.description"
+        :variant="selectedTag.color"
+      />
     </div>
   </section>
 </template>
@@ -108,7 +130,6 @@ const boxConfig = {
   rotate: 20deg;
 }
 
-
 .right-top-box {
   right: -150px;
   top: -20px;
@@ -133,7 +154,7 @@ const boxConfig = {
 
 .crafting__title {
   position: relative;
-  font-size: clamp(6.2rem, 66vw, 6rem);
+  font-size: clamp(6.2rem, 66vw, 8rem);
   font-weight: 400;
   color: var(--color-white);
   text-align: center;
@@ -147,48 +168,69 @@ const boxConfig = {
 }
 
 @media screen and (max-width: 700px) {
+  .crafting {
+    padding: 150px 24px 100px 24px;
+  }
+
   .crafting__title {
     width: 300px !important;
-    font-size: clamp(4.2rem, 66vw, 4rem);
+    font-size: clamp(5.2rem, 66vw, 4rem);
   }
 
   .top {
     top: -30px;
+    width: 148px;
+    rotate: 10deg;
   }
 
   .top-sec-text {
-    left: 0;
-    top: 20px;
+    left: -45px;
+    rotate: -5deg;
+    top: 15px;
+    width: fit-content;
+    font-size: 1rem;
+  }
+
+  .right-top-text {
+    width: fit-content;
+    font-size: 1rem;
   }
 
   .right-top-box {
-    right: -20px;
-    rotate: 45deg;
+    right: -60px;
+    rotate: 53deg;
   }
 
   .right-bottom-box {
     right: -10px;
     bottom: -10px;
     rotate: -45deg;
+    width: fit-content;
   }
 
   .top {
-    left: 29px !important;
+    left: -10px !important;
     top: -39px !important;
-    width: 130px;
+    width: 150px;
+    font-size: 1rem;
   }
 
   .bottom-second-text {
     top: 35px !important;
+    rotate: 10deg;
+  }
+
+  .crafting__tag {
+    font-size: 1rem;
   }
 
   .left-bottom-box {
-    left: 0 !important;
-    bottom: 10px !important;
+    left: -15px !important;
+    bottom: -20px !important;
     rotate: 40deg !important;
+    width: fit-content;
   }
 }
-
 
 @media screen and (min-width: 700px) and (max-width: 800px) {
   .crafting__title {
@@ -212,7 +254,7 @@ const boxConfig = {
 
 @media screen and (min-width: 1024px) {
   .crafting__title {
-    width: 500px;
+    width: fit-content;
   }
 }
 </style>
