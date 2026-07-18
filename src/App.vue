@@ -27,5 +27,7 @@ import StayConnected from './components/StayConnected.vue'
 <style scoped>
 .app {
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 </style>

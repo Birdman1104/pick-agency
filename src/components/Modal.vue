@@ -51,8 +51,10 @@ watch(
   (isOpen) => {
     if (isOpen) {
       window.addEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'hidden'
     } else {
       window.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = ''
     }
   },
   { immediate: true }
@@ -60,6 +62,7 @@ watch(
 
 onUnmounted(() => {
   window.removeEventListener('keydown', handleEscape)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -72,6 +75,10 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 24px 16px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-enter-active,
@@ -98,43 +105,88 @@ onUnmounted(() => {
 .modal {
   background: white;
   position: relative;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 740px;
-  max-height: 480px;
-  width: 80%;
-  height: 50%;
-  align-items: center;
+  padding: 40px 32px 32px;
+  border-radius: 12px;
+  width: min(740px, 100%);
+  max-height: min(480px, calc(100dvh - 48px));
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  margin: auto;
 }
 
 .modal-title {
-  font-size: 35px;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
   margin-bottom: 12px;
+  line-height: 1.15;
+  padding-inline: 28px;
+  font-family: 'BebasNeue', sans-serif;
+  letter-spacing: 0.03em;
 }
 
 .modal-description {
-  margin-bottom: 18px;
+  margin-bottom: 0;
+  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+  line-height: 1.55;
+  max-width: 56ch;
 }
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 40px;
+  top: 4px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
   font-weight: 100;
+  line-height: 1;
   color: inherit;
+  z-index: 1;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
+  .overlay {
+    align-items: flex-end;
+    padding: 12px 12px max(12px, env(safe-area-inset-bottom));
+  }
+
+  .modal {
+    width: 100%;
+    max-height: min(85dvh, calc(100dvh - 24px));
+    height: auto;
+    padding: 36px 20px 24px;
+    border-radius: 16px 16px 12px 12px;
+    justify-content: flex-start;
+  }
+
+  .modal-enter-from .modal,
+  .modal-leave-to .modal {
+    transform: translateY(24px) scale(1);
+  }
+
   .modal-title {
-    font-size: 20px;
+    font-size: 1.65rem;
+    margin-bottom: 14px;
+    padding-inline: 32px;
   }
 
   .modal-description {
-    font-size: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .close-btn {
+    top: 2px;
+    right: 4px;
+    font-size: 34px;
   }
 }
 </style>
