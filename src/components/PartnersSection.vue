@@ -99,6 +99,12 @@ const marqueeTools = [...tools, ...tools]
   }
 }
 
+@media screen and (max-width: 700px) {
+  .partners__title {
+    line-height: normal;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .partners__track {
     animation: none;

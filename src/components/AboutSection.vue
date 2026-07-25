@@ -1,11 +1,12 @@
 <script setup>
+const BASE_URL = import.meta.env.BASE_URL
 </script>
 
 <template>
   <section class="about" id="about">
     <div class="container about__inner">
       <div class="about__image">
-        <img src="/section_3_img.png" alt="Team at PICK Agency" />
+        <img :src="`${BASE_URL}section_3_img.png`" alt="Team at PICK Agency" />
       </div>
       <div class="about__content">
         <p class="about__label">ABOUT US</p>

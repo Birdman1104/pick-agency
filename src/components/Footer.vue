@@ -27,6 +27,7 @@ const touchColorPairs = [
 ]
 
 const colorIndex = ref(0)
+const BASE_URL = import.meta.env.BASE_URL
 let touchTimeout
 let touchInterval
 
@@ -52,7 +53,7 @@ onUnmounted(() => {
     <div class="container footer__inner">
       <div class="footer__brand">
         <div class="footer__logo-row">
-          <img src="/logo_big.png" alt="PICK" class="footer__logo" />
+          <img :src="`${BASE_URL}logo_big.png`" alt="PICK" class="footer__logo" />
         </div>
         <div class="footer__brand-visual">
           <div class="footer__email-wrap">

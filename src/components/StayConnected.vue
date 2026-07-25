@@ -6,6 +6,8 @@ const form = ref({
   phone: '',
 })
 
+const BASE_URL = import.meta.env.BASE_URL
+
 const handleSubmit = (e) => {
   e.preventDefault()
   console.log('Form submitted:', form.value)
@@ -19,7 +21,7 @@ const handleSubmit = (e) => {
 <template>
   <section class="stay-connected" id="contact">
     <div class="stay-connected__bg">
-      <img src="/smiley_big.png" alt="" class="stay-connected__smiley" aria-hidden="true" />
+      <img :src="`${BASE_URL}smiley_big.png`" alt="" class="stay-connected__smiley" aria-hidden="true" />
     </div>
     <div class="container stay-connected__inner">
       <h2 class="stay-connected__title">
@@ -32,7 +34,7 @@ const handleSubmit = (e) => {
       </form>
     </div>
     <a href="mailto:arsenmazmanyan11@gmail.com" class="stay-connected__contact-btn" aria-label="Contact us">
-      <img src="/email_icon.png" alt="" width="24" height="24" />
+      <img :src="`${BASE_URL}email_icon.png`" alt="" width="24" height="24" />
     </a>
   </section>
 </template>

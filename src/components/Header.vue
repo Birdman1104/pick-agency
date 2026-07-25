@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 
 const isMenuOpen = ref(false)
+const BASE_URL = import.meta.env.BASE_URL
 
 const navLinks = [
   { label: 'About us', href: '#about' },
@@ -14,7 +15,7 @@ const navLinks = [
   <header class="header">
     <div class="container header__inner">
       <a href="#" class="header__logo">
-        <img src="/logo_big.png" alt="PICK Marketing Agency" class="header__logo-img" />
+        <img :src="`${BASE_URL}logo_big.png`" alt="PICK Marketing Agency" class="header__logo-img" />
       </a>
       <nav class="nav" :class="{ 'nav--open': isMenuOpen }">
         <a v-for="link in navLinks" :key="link.label" :href="link.href" class="nav__link" @click="isMenuOpen = false">

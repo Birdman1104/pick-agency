@@ -10,7 +10,7 @@ import CraftingTag from "./CraftingTag.vue";
 import Modal from "./Modal.vue";
 
 /** Single cursor image for desktop + mobile */
-const CURSOR_SRC = "/cursor.svg";
+const CURSOR_SRC = `${import.meta.env.BASE_URL}cursor.svg`;
 
 const showModal = ref(false);
 const selectedTag = ref(null);

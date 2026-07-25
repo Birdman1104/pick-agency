@@ -72,6 +72,7 @@ import { useMediaQuery } from "@vueuse/core";
 import { onMounted, ref } from "vue";
 
 const isMobile = useMediaQuery("(max-width: 768px)");
+const BASE_URL = import.meta.env.BASE_URL;
 const isVisible = ref(false);
 const isAligned = ref(false);
 
@@ -126,7 +127,7 @@ onMounted(() => {
           :class="{ 'hero__brand--centered': !isMobile && isAligned }"
         >
           <img
-            src="/logo_big.png"
+            :src="`${BASE_URL}logo_big.png`"
             alt="PICK"
             :class="['hero__logo', { 'hero__logo--visible': isAligned }]"
           />
@@ -178,7 +179,7 @@ onMounted(() => {
         <a href="#contact" class="hero__cta">Contact Us</a>
       </div>
       <div class="hero__image">
-        <img src="/section_2_bkg.png" alt="Creative workspace" />
+        <img :src="`${BASE_URL}section_2_bkg.png`" alt="Creative workspace" />
       </div>
     </div>
   </section>
