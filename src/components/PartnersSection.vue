@@ -1,23 +1,23 @@
 <script setup>
 const tools = [
-  { logo: 'after-effects.png', name: 'After Effects' },
-  { logo: 'ahrefs.png', name: 'Ahrefs' },
-  { logo: 'figma.png', name: 'Figma' },
-  { logo: 'google-ads.png', name: 'Google Ads' },
-  { logo: 'google-analytics.png', name: 'Google Analytics' },
-  { logo: 'google-tag-manager.png', name: 'Google Tag Manager' },
-  { logo: 'illustrator.png', name: 'Illustrator' },
-  { logo: 'meta.png', name: 'Meta' },
-  { logo: 'photoshop.png', name: 'Photoshop' },
-  { logo: 'premier-pro.png', name: 'Premier Pro' },
-  { logo: 'screaming-frog.png', name: 'Screaming Frog' },
-  { logo: 'semrush.png', name: 'Semrush' },
-  { logo: 'slack.png', name: 'Slack' },
-  { logo: 'spyfu.png', name: 'Spyfu' },
-  { logo: 'tiktok.png', name: 'TikTok' },
-]
+  { logo: "after-effects.png", name: "After Effects" },
+  { logo: "ahrefs.png", name: "Ahrefs" },
+  { logo: "figma.png", name: "Figma" },
+  { logo: "google-ads.png", name: "Google Ads" },
+  { logo: "google-analytics.png", name: "Google Analytics" },
+  { logo: "google-tag-manager.png", name: "Google Tag Manager" },
+  { logo: "illustrator.png", name: "Illustrator" },
+  { logo: "meta.png", name: "Meta" },
+  { logo: "photoshop.png", name: "Photoshop" },
+  { logo: "premier-pro.png", name: "Premier Pro" },
+  { logo: "screaming-frog.png", name: "Screaming Frog" },
+  { logo: "semrush.png", name: "Semrush" },
+  { logo: "slack.png", name: "Slack" },
+  { logo: "spyfu.png", name: "Spyfu" },
+  { logo: "tiktok.png", name: "TikTok" },
+];
 
-const marqueeTools = [...tools, ...tools]
+const marqueeTools = [...tools, ...tools];
 </script>
 
 <template>
@@ -28,8 +28,12 @@ const marqueeTools = [...tools, ...tools]
 
     <div class="partners__carousel">
       <div class="partners__track">
-        <div v-for="(partner, index) in marqueeTools" :key="`${partner.logo}-${index}`" class="partners__item"
-          :aria-hidden="index >= tools.length">
+        <div
+          v-for="(partner, index) in marqueeTools"
+          :key="`${partner.logo}-${index}`"
+          class="partners__item"
+          :aria-hidden="index >= tools.length"
+        >
           <img :src="partner.logo" :alt="partner.name" class="partners__logo" />
         </div>
       </div>
@@ -40,7 +44,7 @@ const marqueeTools = [...tools, ...tools]
 <style scoped>
 .partners {
   position: relative;
-  background: var(--color-lavender);
+  background: var(--color-elephant);
   padding: 80px 0;
   overflow: hidden;
 }
@@ -57,11 +61,7 @@ const marqueeTools = [...tools, ...tools]
 .partners__carousel {
   width: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(to right,
-      transparent,
-      black 8%,
-      black 92%,
-      transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
 .partners__track {

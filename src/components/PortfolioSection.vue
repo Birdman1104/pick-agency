@@ -65,7 +65,7 @@ const projects = [
 
 <style scoped>
 .portfolio {
-  background: #E5E5E5;
+  background: var(--color-elephant);
   padding: 80px 0;
 }
 
@@ -82,14 +82,6 @@ const projects = [
   display: flex;
   gap: 16px;
   margin-bottom: 32px;
-}
-
-@media (min-width: 768px) {
-  .portfolio__grid {
-    grid-template-columns: 1.2fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 24px;
-  }
 }
 
 .portfolio__card {
@@ -211,5 +203,24 @@ const projects = [
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .portfolio__grid {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio__grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+  ․cards-wrapper {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>
